@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../lib/assets';
 import { entrySlug } from '../lib/entries';
 import { formatDate } from '../lib/format';
 import site from '../content/settings/site.json';
@@ -13,7 +14,7 @@ const projects = (await getCollection('projects')).sort((a, b) => {
   if (a.data.featured !== b.data.featured) return Number(b.data.featured) - Number(a.data.featured);
   return (b.data.year ?? 0) - (a.data.year ?? 0);
 });
-const featuredProjects = projects.slice(0, 6);
+const featuredProjects = projects.slice(0, 12);
 const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order).slice(0, 5);
 const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year).slice(0, 4);
 const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4);
@@ -44,11 +45,11 @@ const introColumns = [
     </section>
 
     <section class="container">
-      <SectionTitle title="Projects" note="Selected entries from the current placeholder archive" />
+      <SectionTitle title="Projects" note="Selected entries from the current placeholder archive. Scroll horizontally to browse the strip." />
       <div class="media-strip">
         {featuredProjects.map((project) => (
           <ProjectCard
-            href={`/projects/${entrySlug(project.id)}/`}
+            href={withBase(`/projects/${entrySlug(project.id)}/`)}
             title={project.data.title}
             meta={[project.data.year?.toString(), project.data.status].filter(Boolean).join(' · ')}
             src={project.data.cover}
@@ -93,7 +94,7 @@ const introColumns = [
           {news.map((item) => (
             <article class="dense-item">
               <div class="dense-meta">{formatDate(item.data.date)}</div>
-              <div class="dense-title"><a href={`/news/${entrySlug(item.id)}/`}>{item.data.title}</a></div>
+              <div class="dense-title"><a href={withBase(`/news/${entrySlug(item.id)}/`)}>{item.data.title}</a></div>
               <div class="dense-text">{item.data.excerpt}</div>
             </article>
           ))}
@@ -105,7 +106,7 @@ const introColumns = [
         <div class="dense-list">
           {people.map((person) => (
             <article class="dense-item">
-              <div class="dense-title"><a href={`/people/${entrySlug(person.id)}/`}>{person.data.name}</a></div>
+              <div class="dense-title"><a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a></div>
               <div class="dense-meta">{person.data.role}</div>
               {person.data.shortBio && <div class="dense-text">{person.data.shortBio}</div>}
             </article>
@@ -117,15 +118,15 @@ const introColumns = [
         <h2 class="home-column-title">About</h2>
         <div class="dense-list">
           <article class="dense-item">
-            <div class="dense-title"><a href="/about">Laboratory profile</a></div>
+            <div class="dense-title"><a href={withBase('/about/')}>Laboratory profile</a></div>
             <div class="dense-text">Overview, scope, contact information, and the current structure of the RAMSLAB site.</div>
           </article>
           <article class="dense-item">
-            <div class="dense-title"><a href="/projects">Project archive</a></div>
+            <div class="dense-title"><a href={withBase('/projects/')}>Project archive</a></div>
             <div class="dense-text">Research projects, prototypes, and collaborative investigations.</div>
           </article>
           <article class="dense-item">
-            <div class="dense-title"><a href="/publications">Publication archive</a></div>
+            <div class="dense-title"><a href={withBase('/publications/')}>Publication archive</a></div>
             <div class="dense-text">Grouped research outputs indexed by year.</div>
           </article>
         </div>

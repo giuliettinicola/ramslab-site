@@ -13,13 +13,13 @@ const links = [
 ];
 
 const isActive = (href: string) =>
-  pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
+  pathname === withBase(href).replace(/\/+$/, '') || (href !== '/' && pathname.startsWith(withBase(href)));
 ---
 
 <header class="site-header">
   <div class="container site-header-inner">
     <div class="site-brand">
-      <a href="/" class="site-brand-link">
+      <a href={withBase('/')} class="site-brand-link">
         <img src={withBase('/images/brand/ramslab-icon-black.png')} alt="" width="28" height="28" />
         <span>
           <span class="site-title">{site.siteTitle}</span>
@@ -30,7 +30,7 @@ const isActive = (href: string) =>
     </div>
     <nav class="site-nav" aria-label="Primary">
       {links.map((link) => (
-        <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
+        <a href={withBase(link.href)} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
       ))}
     </nav>
     <div class="site-indicator">{site.address}</div>

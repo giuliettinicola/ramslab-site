@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import ArchiveItem from '../../components/ArchiveItem.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
 
 const projects = (await getCollection('projects')).sort((a, b) => {
@@ -30,7 +31,7 @@ const projects = (await getCollection('projects')).sort((a, b) => {
             {projects.map((project) => (
               <ArchiveItem
                 title={project.data.title}
-                href={`/projects/${entrySlug(project.id)}/`}
+                href={withBase(`/projects/${entrySlug(project.id)}/`)}
                 text={project.data.excerpt}
                 left={[project.data.year ? String(project.data.year) : 'Undated', project.data.status ?? 'Project record']}
                 right={[

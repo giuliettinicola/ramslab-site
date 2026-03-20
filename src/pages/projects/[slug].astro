@@ -51,7 +51,7 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
           {relatedPeople.length > 0 && (
             <div class="detail-block">
               <div class="detail-block-label">People</div>
-              {relatedPeople.map((person) => <a href={`/people/${entrySlug(person.id)}/`}>{person.data.name}</a>)}
+              {relatedPeople.map((person) => <a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a>)}
             </div>
           )}
 
