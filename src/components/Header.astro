@@ -1,5 +1,6 @@
 ---
 import site from '../content/settings/site.json';
+import { withBase } from '../lib/assets';
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const links = [
@@ -19,7 +20,7 @@ const isActive = (href: string) =>
   <div class="container site-header-inner">
     <div class="site-brand">
       <a href="/" class="site-brand-link">
-        <img src="/images/brand/ramslab-icon-black.png" alt="" width="28" height="28" />
+        <img src={withBase('/images/brand/ramslab-icon-black.png')} alt="" width="28" height="28" />
         <span>
           <span class="site-title">{site.siteTitle}</span>
           <span class="site-subtitle">{site.siteDescription}</span>

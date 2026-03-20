@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
 import { formatDate } from '../../lib/format';
 
@@ -46,7 +47,7 @@ const relatedProjects = projects.filter((project) => item.data.relatedProjects.i
         <article class="detail-main">
           {item.data.cover && (
             <figure class="detail-media">
-              <img src={item.data.cover} alt={item.data.title} />
+              <img src={withBase(item.data.cover)} alt={item.data.title} />
             </figure>
           )}
           <div class="detail-content">
