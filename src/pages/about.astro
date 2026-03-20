@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import site from '../content/settings/site.json';
+---
+
+<BaseLayout title="About — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="About"
+      title="About"
+      description="This page defines the current editorial frame of the RAMSLAB site while the final laboratory content is still being prepared."
+      note="placeholder institutional profile"
+    />
+    <section class="container about-grid">
+      <div class="page-kicker">Overview</div>
+      <div class="about-columns">
+        <div class="about-column">
+          <h2>Laboratory profile</h2>
+          <p>RAMSLAB is being structured as a static-first research website built with Astro and content collections. The present version focuses on page hierarchy, archive behavior, and a restrained editorial visual language rather than on final public content.</p>
+        </div>
+
+        <div class="about-column">
+          <h2>Current scope</h2>
+          <p>The archive currently includes projects, people, publications, news, and consortium partners. All entries remain placeholders intended to validate templates, metadata, and future editing workflows.</p>
+        </div>
+
+        <div class="about-column">
+          <h2>Contact</h2>
+          <ul>
+            <li>{site.siteTitle}</li>
+            <li>{site.siteDescription}</li>
+            <li>{site.address}</li>
+            {site.contactEmail && <li><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></li>}
+          </ul>
+        </div>
+
+        <div class="about-column">
+          <h2>Editing model</h2>
+          <p>The site is driven by Markdown and data files so that future RAMSLAB updates can be made without redesigning templates. This keeps the architecture stable while content grows.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

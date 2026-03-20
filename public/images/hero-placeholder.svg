@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">RAMSLAB placeholder image</title>
+  <desc id="desc">Monochrome placeholder for editorial layout testing.</desc>
+  <rect width="1600" height="900" fill="#f2f2f2"/>
+  <rect x="80" y="80" width="1440" height="740" fill="none" stroke="#bdbdbd" stroke-width="2"/>
+  <path d="M80 450h1440M800 80v740" stroke="#d8d8d8" stroke-width="2"/>
+  <rect x="140" y="140" width="500" height="220" fill="#e3e3e3"/>
+  <rect x="960" y="520" width="500" height="220" fill="#e3e3e3"/>
+  <text x="140" y="700" fill="#5f5f5f" font-family="Helvetica, Arial, sans-serif" font-size="34" letter-spacing="4">RAMSLAB PLACEHOLDER</text>
+</svg>

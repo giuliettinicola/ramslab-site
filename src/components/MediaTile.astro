@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  meta?: string;
+  src?: string;
+  alt?: string;
+}
+
+const { href, title, meta, src, alt = title } = Astro.props;
+---
+
+<article class="media-tile">
+  <a class="media-thumb" href={href}>
+    {src ? <img src={src} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
+  </a>
+  <div class="media-caption">
+    <div class="media-title"><a href={href}>{title}</a></div>
+    {meta && <div class="media-meta">{meta}</div>}
+  </div>
+</article>

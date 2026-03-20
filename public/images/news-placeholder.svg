@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">News placeholder</title>
+  <desc id="desc">Monochrome placeholder image for news entries.</desc>
+  <rect width="1200" height="900" fill="#f1f1f1"/>
+  <rect x="80" y="80" width="1040" height="740" fill="none" stroke="#bdbdbd" stroke-width="2"/>
+  <rect x="140" y="140" width="920" height="180" fill="#e1e1e1"/>
+  <path d="M140 410h920M140 510h920M140 610h520" stroke="#d2d2d2" stroke-width="18" stroke-linecap="square"/>
+  <text x="140" y="760" fill="#666" font-family="Helvetica, Arial, sans-serif" font-size="28" letter-spacing="3">NEWS ENTRY</text>
+</svg>

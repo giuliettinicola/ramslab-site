@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ConsortiumCard from '../../components/ConsortiumCard.astro';
+import { getCollection } from 'astro:content';
+
+const consortium = (await getCollection('consortium')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Consortium — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="Consortium"
+      title="Consortium"
+      description="Institutional, industrial, and research partners connected to the placeholder RAMSLAB structure."
+      countText={`${consortium.length} partner records`}
+      note="ordered manually"
+    />
+    <section class="archive-section">
+      <div class="container">
+        <div class="archive-group">
+          <div class="archive-list">
+            {consortium.map((partner) => (
+              <ConsortiumCard title={partner.data.name} text={partner.data.description} href={partner.data.website} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

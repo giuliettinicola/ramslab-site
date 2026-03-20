@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ArchiveItem from '../../components/ArchiveItem.astro';
+import { getCollection } from 'astro:content';
+import { entrySlug } from '../../lib/entries';
+import { formatDate } from '../../lib/format';
+
+const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="News — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="News"
+      title="News"
+      description="Updates, announcements, and laboratory activity entries used to validate a compact editorial news archive."
+      countText={`${news.length} news entries`}
+      note="ordered by date"
+    />
+    <section class="archive-section">
+      <div class="container">
+        <div class="archive-group">
+          <div class="archive-list">
+            {news.map((item) => (
+              <ArchiveItem
+                title={item.data.title}
+                href={`/news/${entrySlug(item.id)}/`}
+                text={item.data.excerpt}
+                left={[formatDate(item.data.date)]}
+                right={[
+                  item.data.relatedProjects.length > 0 ? `${item.data.relatedProjects.length} related projects` : '',
+                  item.data.featured ? 'Featured' : ''
+                ].filter(Boolean)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

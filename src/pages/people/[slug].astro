@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection, render } from 'astro:content';
+import { entrySlug } from '../../lib/entries';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.map((person) => ({ params: { slug: entrySlug(person.id) }, props: { person } }));
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+---
+
+<BaseLayout title={`${person.data.name} — RAMSLAB`}>
+  <Header />
+  <main>
+    <PageHeader
+      section="People"
+      title={person.data.name}
+      description={person.data.role}
+      note={person.data.areas.length > 0 ? person.data.areas.join(' · ') : undefined}
+    />
+    <section class="detail-section">
+      <div class="container detail-layout">
+        <aside class="detail-aside">
+          {person.data.email && (
+            <div class="detail-block">
+              <div class="detail-block-label">Contact</div>
+              <a href={`mailto:${person.data.email}`}>{person.data.email}</a>
+            </div>
+          )}
+
+          {person.data.areas.length > 0 && (
+            <div class="detail-block">
+              <div class="detail-block-label">Areas</div>
+              {person.data.areas.map((area) => <div>{area}</div>)}
+            </div>
+          )}
+
+          {person.data.links.length > 0 && (
+            <div class="detail-block">
+              <div class="detail-block-label">Links</div>
+              {person.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+            </div>
+          )}
+        </aside>
+
+        <article class="detail-main">
+          {person.data.image && (
+            <figure class="detail-media">
+              <img src={person.data.image} alt={person.data.name} />
+            </figure>
+          )}
+          <div class="detail-content">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

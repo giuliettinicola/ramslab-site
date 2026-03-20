@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ArchiveItem from '../../components/ArchiveItem.astro';
+import { getCollection } from 'astro:content';
+import { entrySlug } from '../../lib/entries';
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return Number(b.data.featured) - Number(a.data.featured);
+  return (b.data.year ?? 0) - (a.data.year ?? 0);
+});
+---
+
+<BaseLayout title="Projects — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="Projects"
+      title="Projects"
+      description="Research projects, prototypes, and collaborative investigations presented as a structured archive."
+      countText={`${projects.length} project entries`}
+      note="ordered by featured status and year"
+    />
+    <section class="archive-section">
+      <div class="container">
+        <div class="archive-group">
+          <div class="archive-list">
+            {projects.map((project) => (
+              <ArchiveItem
+                title={project.data.title}
+                href={`/projects/${entrySlug(project.id)}/`}
+                text={project.data.excerpt}
+                left={[project.data.year ? String(project.data.year) : 'Undated', project.data.status ?? 'Project record']}
+                right={[
+                  project.data.tags.length > 0 ? project.data.tags.slice(0, 2).join(' · ') : '',
+                  project.data.people.length > 0 ? `${project.data.people.length} related people` : ''
+                ].filter(Boolean)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

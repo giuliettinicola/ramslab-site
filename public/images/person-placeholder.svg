@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Person placeholder</title>
+  <desc id="desc">Monochrome placeholder image for people entries.</desc>
+  <rect width="1200" height="900" fill="#f3f3f3"/>
+  <circle cx="600" cy="320" r="150" fill="#dfdfdf"/>
+  <path d="M320 760c0-160 125-260 280-260s280 100 280 260" fill="#dfdfdf"/>
+  <rect x="70" y="70" width="1060" height="760" fill="none" stroke="#bdbdbd" stroke-width="2"/>
+  <text x="130" y="790" fill="#666" font-family="Helvetica, Arial, sans-serif" font-size="28" letter-spacing="3">PROFILE IMAGE</text>
+</svg>

@@ -1,0 +1,18 @@
+---
+import ArchiveItem from './ArchiveItem.astro';
+
+interface Props {
+  title: string;
+  authors: string[];
+  year: number;
+  venue?: string;
+  url?: string;
+  doi?: string;
+}
+
+const { title, authors, year, venue, url, doi } = Astro.props;
+const text = [authors.join(', '), venue].filter(Boolean).join('. ');
+const right = [doi ? `DOI: ${doi}` : '', url ? 'External link' : 'Archive entry'].filter(Boolean);
+---
+
+<ArchiveItem title={title} href={url} text={text} left={[String(year)]} right={right} />

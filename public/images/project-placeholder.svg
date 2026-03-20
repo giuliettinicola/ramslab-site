@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Project placeholder</title>
+  <desc id="desc">Monochrome placeholder image for project entries.</desc>
+  <rect width="1200" height="900" fill="#efefef"/>
+  <rect x="70" y="70" width="1060" height="760" fill="none" stroke="#bcbcbc" stroke-width="2"/>
+  <path d="M70 450h1060" stroke="#d7d7d7" stroke-width="2"/>
+  <path d="M600 70v760" stroke="#d7d7d7" stroke-width="2"/>
+  <rect x="120" y="120" width="260" height="150" fill="#dfdfdf"/>
+  <rect x="760" y="560" width="260" height="150" fill="#dfdfdf"/>
+  <text x="120" y="790" fill="#666" font-family="Helvetica, Arial, sans-serif" font-size="28" letter-spacing="3">PROJECT RECORD</text>
+</svg>

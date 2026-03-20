@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Partner placeholder</title>
+  <desc id="desc">Monochrome placeholder image for consortium entries.</desc>
+  <rect width="1200" height="900" fill="#f1f1f1"/>
+  <rect x="80" y="80" width="1040" height="740" fill="none" stroke="#bdbdbd" stroke-width="2"/>
+  <rect x="200" y="260" width="800" height="220" fill="#e0e0e0"/>
+  <rect x="200" y="540" width="420" height="40" fill="#d2d2d2"/>
+  <rect x="200" y="620" width="280" height="40" fill="#d2d2d2"/>
+  <text x="200" y="760" fill="#666" font-family="Helvetica, Arial, sans-serif" font-size="28" letter-spacing="3">CONSORTIUM PARTNER</text>
+</svg>

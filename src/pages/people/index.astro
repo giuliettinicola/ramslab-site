@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ArchiveItem from '../../components/ArchiveItem.astro';
+import { getCollection } from 'astro:content';
+import { entrySlug } from '../../lib/entries';
+
+const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="People — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="People"
+      title="People"
+      description="Researchers, collaborators, students, and affiliated profiles currently used to validate the people archive."
+      countText={`${people.length} people records`}
+      note="ordered manually from collection metadata"
+    />
+    <section class="archive-section">
+      <div class="container">
+        <div class="archive-group">
+          <div class="archive-list">
+            {people.map((person) => (
+              <ArchiveItem
+                title={person.data.name}
+                href={`/people/${entrySlug(person.id)}/`}
+                text={person.data.shortBio}
+                left={[person.data.role]}
+                right={[
+                  person.data.areas.length > 0 ? person.data.areas.slice(0, 2).join(' · ') : '',
+                  person.data.email ?? ''
+                ].filter(Boolean)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import site from '../content/settings/site.json';
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const links = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/people', label: 'People' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/news', label: 'News' },
+  { href: '/consortium', label: 'Consortium' },
+  { href: '/about', label: 'About' }
+];
+
+const isActive = (href: string) =>
+  pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
+---
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <div class="site-brand">
+      <a href="/" class="site-brand-link">
+        <img src="/images/brand/ramslab-icon-black.png" alt="" width="28" height="28" />
+        <span>
+          <span class="site-title">{site.siteTitle}</span>
+          <span class="site-subtitle">{site.siteDescription}</span>
+        </span>
+      </a>
+      <p class="site-tagline">Research archive, projects, people, publications, and laboratory updates.</p>
+    </div>
+    <nav class="site-nav" aria-label="Primary">
+      {links.map((link) => (
+        <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </nav>
+    <div class="site-indicator">{site.address}</div>
+  </div>
+</header>
