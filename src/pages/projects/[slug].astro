@@ -18,10 +18,8 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const people = await getCollection('people');
 const publications = await getCollection('publications');
-const consortium = await getCollection('consortium');
 const relatedPeople = people.filter((person) => project.data.people.includes(entrySlug(person.id)));
 const relatedPublications = publications.filter((publication) => project.data.publications.includes(entrySlug(publication.id)));
-const relatedPartners = consortium.filter((partner) => project.data.consortium.includes(entrySlug(partner.id)));
 const note = [project.data.year ? String(project.data.year) : '', project.data.status].filter(Boolean).join(' · ');
 ---
 {project.id === 'carbon-fiber' ? (
@@ -30,7 +28,6 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
     Content={Content}
     relatedPeople={relatedPeople} 
     relatedPublications={relatedPublications} 
-    relatedPartners={relatedPartners} 
   />
 ) : (
 <BaseLayout title={`${project.data.title} — RAMSLAB`}>
@@ -74,14 +71,7 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
             </div>
           )}
 
-          {relatedPartners.length > 0 && (
-            <div class="detail-block">
-              <div class="detail-block-label">Consortium</div>
-              {relatedPartners.map((partner) => (
-                partner.data.website ? <a href={partner.data.website}>{partner.data.name}</a> : <div>{partner.data.name}</div>
-              ))}
-            </div>
-          )}
+
         </aside>
 
         <article class="detail-main">
