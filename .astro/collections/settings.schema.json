@@ -10,6 +10,9 @@
         "siteDescription": {
           "type": "string"
         },
+        "siteMotto": {
+          "type": "string"
+        },
         "contactEmail": {
           "type": "string"
         },

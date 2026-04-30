@@ -15,15 +15,19 @@ const projects = (await getCollection('projects')).sort((a, b) => {
   return (b.data.year ?? 0) - (a.data.year ?? 0);
 });
 const featuredProjects = projects.slice(0, 12);
-const people = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order).slice(0, 5);
+const allPeople = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
+const people = allPeople.slice(0, 5);
+const otherPeople = allPeople.slice(5).sort((a, b) => {
+  const surnameA = a.data.name.split(' ').pop() || '';
+  const surnameB = b.data.name.split(' ').pop() || '';
+  return surnameA.localeCompare(surnameB);
+});
 const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year).slice(0, 4);
-const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4);
-const consortium = (await getCollection('consortium')).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 
 const introColumns = [
-  'RAMSLAB is a research laboratory at the University of Pavia focused on measurements, systems, computer vision, robotics, and digitally mediated observation.',
-  'This rebuild is intentionally structured as an editorial archive. Projects, publications, people, and institutional information are presented through lists, detail pages, and reusable content entries rather than a promotional landing page.',
-  'The current material remains placeholder content. The purpose of this phase is to validate information architecture, layout rhythm, and hierarchy before the final RAMSLAB archive is migrated.'
+  'Welcome to RAMS lab! Our aim is to bring innovation and creativity to industrial and research applications using cutting-edge robotics and dynamic simulators. Our team of researchers is dedicated to advancing the field of robotics and simulators in order to revolutionize the way industries operate. We are constantly exploring new ways to apply this technology to enhance productivity, improve safety, and reduce costs.',
+  'One of our main focuses is on developing simulators for sports and driving. Our state-of-the-art simulators are designed to provide athletes and drivers with a realistic training experience, allowing them to improve their skills and performance in a safe and controlled environment. These simulators are also a valuable tool for medical researches, as they can be used to analyze and optimize performances of people who need rehabilitation in a controlled environment.',
+  'In addition to our work in simulators, we also specialize in robotics for industrial applications. Our team is constantly developing new robotic applications that can be used in a wide range of industries, from manufacturing and logistics to healthcare and agriculture. Our goal is to make these systems more efficient, reliable, and cost-effective, so that they can be widely adopted and make a significant impact on the industries they serve.'
 ];
 ---
 
@@ -34,7 +38,7 @@ const introColumns = [
       <div class="container home-intro-grid">
         <div class="home-intro-label">
           <div class="label">Laboratory</div>
-          <div class="caption">{site.siteDescription}. Static Astro archive with structured content collections.</div>
+          <div class="caption">{site.siteMotto ?? site.siteDescription}</div>
         </div>
         {introColumns.map((paragraph) => (
           <div class="home-intro-copy">
@@ -60,44 +64,18 @@ const introColumns = [
 
     <section class="container home-columns">
       <div class="home-column">
-        <h2 class="home-column-title">Consortium</h2>
-        <div class="dense-list">
-          {consortium.map((partner) => (
-            <article class="dense-item">
-              <div class="dense-title">
-                {partner.data.website ? <a href={partner.data.website}>{partner.data.name}</a> : partner.data.name}
-              </div>
-              {partner.data.description && <div class="dense-text">{partner.data.description}</div>}
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div class="home-column">
         <h2 class="home-column-title">Publications</h2>
         <div class="dense-list">
           {publications.map((publication) => (
             <article class="dense-item">
-              <div class="dense-meta">{publication.data.year}</div>
-              <div class="dense-title">
-                {publication.data.url ? <a href={publication.data.url}>{publication.data.title}</a> : publication.data.title}
-              </div>
-              <div class="dense-text">{publication.data.authors.join(', ')}</div>
+              <div class="dense-title">{publication.data.title}</div>
+              <div class="dense-meta">{publication.data.authors.join(', ')}</div>
+              {publication.data.venue && <div class="dense-text"><em>{publication.data.venue}</em></div>}
             </article>
           ))}
-        </div>
-      </div>
-
-      <div class="home-column">
-        <h2 class="home-column-title">News</h2>
-        <div class="dense-list">
-          {news.map((item) => (
-            <article class="dense-item">
-              <div class="dense-meta">{formatDate(item.data.date)}</div>
-              <div class="dense-title"><a href={withBase(`/news/${entrySlug(item.id)}/`)}>{item.data.title}</a></div>
-              <div class="dense-text">{item.data.excerpt}</div>
-            </article>
-          ))}
+          <div class="home-column-footer">
+            <a href={withBase('/publications/')} class="browse-link">browse all publications</a>
+          </div>
         </div>
       </div>
 
@@ -108,10 +86,20 @@ const introColumns = [
             <article class="dense-item">
               <div class="dense-title"><a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a></div>
               <div class="dense-meta">{person.data.role}</div>
-              {person.data.shortBio && <div class="dense-text">{person.data.shortBio}</div>}
             </article>
           ))}
         </div>
+        {otherPeople.length > 0 && (
+          <div class="home-column-footer" style="margin-top: 8px;">
+            {otherPeople.map((person, index) => {
+              return (
+                <Fragment>
+                  <a href={withBase(`/people/${entrySlug(person.id)}/`)} style="font-size: 0.82rem; font-weight: 400; color: var(--text); text-decoration: none;">{person.data.name}</a>{index < otherPeople.length - 1 ? ', ' : ''}
+                </Fragment>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div class="home-column">

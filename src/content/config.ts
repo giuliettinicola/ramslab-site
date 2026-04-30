@@ -21,18 +21,12 @@ const publications = defineCollection({ type: 'content', schema: z.object({
   relatedProjects: z.array(z.string()).default([]), featured: z.boolean().default(false)
 }) });
 
-const news = defineCollection({ type: 'content', schema: z.object({
-  title: z.string(), date: z.date(), excerpt: z.string(), cover: z.string().optional(),
-  relatedProjects: z.array(z.string()).default([]), featured: z.boolean().default(false)
-}) });
-
-const consortium = defineCollection({ type: 'content', schema: z.object({
-  name: z.string(), website: z.string().optional(), logo: z.string().optional(),
-  description: z.string().optional(), order: z.number().default(999)
-}) });
-
 const settings = defineCollection({ type: 'data', schema: z.object({
-  siteTitle: z.string(), siteDescription: z.string(), contactEmail: z.string().optional(), address: z.string().optional()
+  siteTitle: z.string(),
+  siteDescription: z.string(),
+  siteMotto: z.string().optional(),
+  contactEmail: z.string().optional(),
+  address: z.string().optional()
 }) });
 
-export const collections = { people, projects, publications, news, consortium, settings };
+export const collections = { people, projects, publications, settings };
