@@ -21,9 +21,9 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() 
 const consortium = (await getCollection('consortium')).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
 
 const introColumns = [
-  'RAMSLAB is a research laboratory at the University of Pavia focused on measurements, systems, computer vision, robotics, and digitally mediated observation.',
-  'This rebuild is intentionally structured as an editorial archive. Projects, publications, people, and institutional information are presented through lists, detail pages, and reusable content entries rather than a promotional landing page.',
-  'The current material remains placeholder content. The purpose of this phase is to validate information architecture, layout rhythm, and hierarchy before the final RAMSLAB archive is migrated.'
+  'Welcome to RAMS lab! Our aim is to bring innovation and creativity to industrial and research applications using cutting-edge robotics and dynamic simulators. Our team of researchers is dedicated to advancing the field of robotics and simulators in order to revolutionize the way industries operate. We are constantly exploring new ways to apply this technology to enhance productivity, improve safety, and reduce costs.',
+  'One of our main focuses is on developing simulators for sports and driving. Our state-of-the-art simulators are designed to provide athletes and drivers with a realistic training experience, allowing them to improve their skills and performance in a safe and controlled environment. These simulators are also a valuable tool for medical researches, as they can be used to analyze and optimize performances of people who need rehabilitation in a controlled environment.',
+  'In addition to our work in simulators, we also specialize in robotics for industrial applications. Our team is constantly developing new robotic applications that can be used in a wide range of industries, from manufacturing and logistics to healthcare and agriculture. Our goal is to make these systems more efficient, reliable, and cost-effective, so that they can be widely adopted and make a significant impact on the industries they serve.'
 ];
 ---
 
@@ -34,7 +34,7 @@ const introColumns = [
       <div class="container home-intro-grid">
         <div class="home-intro-label">
           <div class="label">Laboratory</div>
-          <div class="caption">{site.siteDescription}. Static Astro archive with structured content collections.</div>
+          <div class="caption">{site.siteMotto ?? site.siteDescription}</div>
         </div>
         {introColumns.map((paragraph) => (
           <div class="home-intro-copy">
@@ -49,7 +49,7 @@ const introColumns = [
       <div class="media-strip">
         {featuredProjects.map((project) => (
           <ProjectCard
-            href={withBase(`/projects/${entrySlug(project.id)}/`)}
+            href={entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : undefined}
             title={project.data.title}
             meta={[project.data.year?.toString(), project.data.status].filter(Boolean).join(' · ')}
             src={project.data.cover}

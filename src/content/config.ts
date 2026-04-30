@@ -32,7 +32,11 @@ const consortium = defineCollection({ type: 'content', schema: z.object({
 }) });
 
 const settings = defineCollection({ type: 'data', schema: z.object({
-  siteTitle: z.string(), siteDescription: z.string(), contactEmail: z.string().optional(), address: z.string().optional()
+  siteTitle: z.string(),
+  siteDescription: z.string(),
+  siteMotto: z.string().optional(),
+  contactEmail: z.string().optional(),
+  address: z.string().optional()
 }) });
 
 export const collections = { people, projects, publications, news, consortium, settings };

@@ -39,7 +39,7 @@ const relatedProjects = projects.filter((project) => item.data.relatedProjects.i
           {relatedProjects.length > 0 && (
             <div class="detail-block">
               <div class="detail-block-label">Related projects</div>
-              {relatedProjects.map((project) => <a href={withBase(`/projects/${entrySlug(project.id)}/`)}>{project.data.title}</a>)}
+              {relatedProjects.map((project) => <div>{project.data.title}</div>)}
             </div>
           )}
         </aside>

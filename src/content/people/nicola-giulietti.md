@@ -1,16 +1,15 @@
 ---
 name: "Nicola Giulietti"
-role: "Principal Investigator"
-email: "nicola@example.com"
-image: "/images/person-placeholder.svg"
-shortBio: "Placeholder profile used to validate the people archive, metadata sidebar, and cross-linking between collections."
-areas: ["computer vision", "measurement systems"]
-order: 1
+role: "Assistant Professor"
+email: "nicola.giulietti@unipv.it"
+shortBio: "Assistant Professor working across measurement systems, artificial vision, and mechanical and thermal sensing."
+areas: ["measurement systems", "artificial vision", "mechanical and thermal measurements"]
+order: 4
 links:
-  - label: "University Profile"
-    url: "https://example.com"
+  - label: "UNIFIND Profile"
+    url: "https://unipv.unifind.cineca.it/get/person/062171"
 ---
 
-This is placeholder text for the person page.
+Nicola Giulietti is listed by the University of Pavia in the Department of Industrial and Information Engineering within the field of mechanical and thermal measurements. The current RAMSLAB roster provided for this site identifies him as Assistant Professor.
 
-The final RAMSLAB profile text will replace this content once the information architecture and page rhythm have been approved.
+His official profile also lists teaching in Sensors and Artificial Vision Systems. For the laboratory, this positions his work at the intersection of instrumentation, sensing, and vision-based systems for robotics and simulation.

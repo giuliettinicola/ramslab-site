@@ -9,6 +9,7 @@ const links = [
   { href: '/publications', label: 'Publications' },
   { href: '/news', label: 'News' },
   { href: '/consortium', label: 'Consortium' },
+  { href: '/assistant', label: 'Assistant' },
   { href: '/about', label: 'About' }
 ];
 
@@ -26,7 +27,7 @@ const isActive = (href: string) =>
           <span class="site-subtitle">{site.siteDescription}</span>
         </span>
       </a>
-      <p class="site-tagline">Research archive, projects, people, publications, and laboratory updates.</p>
+      {site.siteMotto && <p class="site-tagline">{site.siteMotto}</p>}
     </div>
     <nav class="site-nav" aria-label="Primary">
       {links.map((link) => (
