@@ -1,6 +1,6 @@
 ---
 interface Props {
-  href: string;
+  href?: string;
   title: string;
   meta?: string;
   src?: string;
@@ -12,11 +12,19 @@ import { withBase } from '../lib/assets';
 ---
 
 <article class="media-tile">
-  <a class="media-thumb" href={href}>
-    {src ? <img src={withBase(src)} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
-  </a>
+  {href ? (
+    <a class="media-thumb" href={href}>
+      {src ? <img src={withBase(src)} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
+    </a>
+  ) : (
+    <div class="media-thumb">
+      {src ? <img src={withBase(src)} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
+    </div>
+  )}
   <div class="media-caption">
-    <div class="media-title"><a href={href}>{title}</a></div>
+    <div class="media-title">
+      {href ? <a href={href}>{title}</a> : title}
+    </div>
     {meta && <div class="media-meta">{meta}</div>}
   </div>
 </article>

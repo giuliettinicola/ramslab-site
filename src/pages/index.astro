@@ -53,7 +53,7 @@ const introColumns = [
       <div class="media-strip">
         {featuredProjects.map((project) => (
           <ProjectCard
-            href={withBase(`/projects/${entrySlug(project.id)}/`)}
+            href={entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : undefined}
             title={project.data.title}
             meta={[project.data.year?.toString(), project.data.status].filter(Boolean).join(' · ')}
             src={project.data.cover}
