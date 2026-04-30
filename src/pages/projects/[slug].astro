@@ -7,6 +7,8 @@ import { getCollection, render } from 'astro:content';
 import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
 
+import CarbonFiberProject from '../../components/CarbonFiberProject.astro';
+
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((project) => ({ params: { slug: entrySlug(project.id) }, props: { project } }));
@@ -22,7 +24,15 @@ const relatedPublications = publications.filter((publication) => project.data.pu
 const relatedPartners = consortium.filter((partner) => project.data.consortium.includes(entrySlug(partner.id)));
 const note = [project.data.year ? String(project.data.year) : '', project.data.status].filter(Boolean).join(' · ');
 ---
-
+{project.id === 'carbon-fiber' ? (
+  <CarbonFiberProject 
+    project={project} 
+    Content={Content}
+    relatedPeople={relatedPeople} 
+    relatedPublications={relatedPublications} 
+    relatedPartners={relatedPartners} 
+  />
+) : (
 <BaseLayout title={`${project.data.title} — RAMSLAB`}>
   <Header />
   <main>
@@ -89,3 +99,4 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
   </main>
   <Footer />
 </BaseLayout>
+)}
