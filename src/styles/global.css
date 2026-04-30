@@ -295,7 +295,7 @@ ol {
 
 .home-columns {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
   padding-bottom: 56px;
 }
@@ -346,6 +346,26 @@ ol {
   font-size: 0.78rem;
   line-height: 1.5;
   color: var(--muted);
+}
+
+.home-column-footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.browse-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.browse-link:hover {
+  text-decoration: none;
 }
 
 .page-header {
@@ -419,6 +439,12 @@ ol {
   display: grid;
 }
 
+.archive-list-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 56px;
+}
+
 .archive-item {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr) 180px;
@@ -429,6 +455,10 @@ ol {
 }
 
 .archive-list .archive-item:first-child {
+  border-top: none;
+}
+
+.archive-list-cols-2 .archive-item:nth-child(-n+2) {
   border-top: none;
 }
 
@@ -471,6 +501,59 @@ ol {
 
 .archive-item-side-empty {
   min-height: 1px;
+}
+
+.pub-item {
+  display: grid;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line-soft);
+  align-items: start;
+}
+
+.archive-list .pub-item:first-child {
+  border-top: none;
+}
+
+.pub-title {
+  display: flex;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.pub-title::before {
+  content: "→";
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.pub-authors {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.pub-venue {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.pub-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.pub-link:hover {
+  text-decoration: none;
 }
 
 .detail-section {
@@ -604,6 +687,128 @@ ol {
   gap: 8px;
 }
 
+.assistant-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px 0 64px;
+}
+
+.assistant-aside {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.assistant-meta-block {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.assistant-meta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.assistant-meta-value {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.assistant-main {
+  display: grid;
+  gap: 18px;
+}
+
+.assistant-log {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.assistant-entry {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.assistant-entry-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.assistant-entry-content {
+  max-width: 52rem;
+  white-space: pre-wrap;
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  line-height: 1.72;
+  color: var(--text-soft);
+}
+
+.assistant-form {
+  display: grid;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.assistant-form textarea {
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.assistant-form textarea:focus,
+.assistant-form button:focus {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.assistant-form-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.assistant-status {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.assistant-form button {
+  min-width: 6rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.assistant-form button:hover {
+  background: #000000;
+}
+
 .site-footer {
   border-top: 1px solid #000000;
   padding: 22px 0 32px;
@@ -674,6 +879,7 @@ ol {
   .page-header-grid,
   .detail-layout,
   .about-grid,
+  .assistant-layout,
   .site-footer-grid,
   .home-intro-grid {
     grid-template-columns: 1fr;
@@ -706,7 +912,8 @@ ol {
 
   .home-columns,
   .about-columns,
-  .detail-aside {
+  .detail-aside,
+  .assistant-entry {
     grid-template-columns: 1fr;
   }
 

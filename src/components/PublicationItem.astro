@@ -11,8 +11,12 @@ interface Props {
 }
 
 const { title, authors, year, venue, url, doi } = Astro.props;
-const text = [authors.join(', '), venue].filter(Boolean).join('. ');
-const right = [doi ? `DOI: ${doi}` : '', url ? 'External link' : 'Archive entry'].filter(Boolean);
+const otherInfo = [venue, doi ? `DOI: ${doi}` : ''].filter(Boolean).join('. ');
 ---
 
-<ArchiveItem title={title} href={url} text={text} left={[String(year)]} right={right} />
+<article class="pub-item">
+  <div class="pub-title">{title}</div>
+  <div class="pub-authors">{authors.join(', ')} ({year}).</div>
+  {otherInfo && <div class="pub-venue">{otherInfo}.</div>}
+  {(doi || url) && <a href={doi ? `https://doi.org/${doi}` : url} class="pub-link" target={doi ? "_blank" : undefined} rel={doi ? "noopener noreferrer" : undefined}>[link]</a>}
+</article>

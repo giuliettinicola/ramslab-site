@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const endpoint = (import.meta.env.PUBLIC_BEE_AGENT_URL || 'http://127.0.0.1:8787') + '/api/chat';
+---
+
+<BaseLayout title="Assistant — RAMSLAB">
+  <Header />
+  <main>
+    <PageHeader
+      section="Assistant"
+      title="Assistant"
+      description="Local RAMSLAB assistant connected to a self-hosted language model. Responses are grounded on the current website archive and intended for research, archive, and institutional queries."
+      note="local model bridge required on the same machine or network"
+    />
+
+    <section class="container assistant-layout">
+      <aside class="assistant-aside">
+        <div class="assistant-meta-block">
+          <div class="assistant-meta-label">Endpoint</div>
+          <div class="assistant-meta-value">{endpoint}</div>
+        </div>
+        <div class="assistant-meta-block">
+          <div class="assistant-meta-label">Scope</div>
+          <div class="assistant-meta-value">Projects, people, publications, news, and institutional details currently present in the RAMSLAB archive.</div>
+        </div>
+        <div class="assistant-meta-block">
+          <div class="assistant-meta-label">Usage</div>
+          <div class="assistant-meta-value">Ask in Italian or English. The assistant should distinguish RAMSLAB-grounded answers from general knowledge.</div>
+        </div>
+      </aside>
+
+      <div class="assistant-main">
+        <div class="assistant-log" id="assistant-log" aria-live="polite">
+          <article class="assistant-entry assistant-entry-system">
+            <div class="assistant-entry-role">System</div>
+            <div class="assistant-entry-content">The local assistant is ready. Start with a question about the RAMSLAB archive, laboratory profile, or current site content.</div>
+          </article>
+        </div>
+
+        <form class="assistant-form" id="assistant-form" data-endpoint={endpoint}>
+          <label class="sr-only" for="assistant-input">Message</label>
+          <textarea
+            id="assistant-input"
+            name="message"
+            rows="5"
+            placeholder="Ask about RAMSLAB projects, people, publications, or the structure of the archive."
+            required
+          ></textarea>
+          <div class="assistant-form-bar">
+            <div class="assistant-status" id="assistant-status">Idle</div>
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script is:inline>
+    const form = document.getElementById('assistant-form');
+    const input = document.getElementById('assistant-input');
+    const log = document.getElementById('assistant-log');
+    const status = document.getElementById('assistant-status');
+    const endpoint = form?.dataset.endpoint;
+    const messages = [];
+
+    const appendEntry = (role, content) => {
+      const article = document.createElement('article');
+      article.className = `assistant-entry assistant-entry-${role}`;
+
+      const roleNode = document.createElement('div');
+      roleNode.className = 'assistant-entry-role';
+      roleNode.textContent = role === 'user' ? 'User' : role === 'assistant' ? 'Assistant' : 'System';
+
+      const contentNode = document.createElement('div');
+      contentNode.className = 'assistant-entry-content';
+      contentNode.textContent = content;
+
+      article.append(roleNode, contentNode);
+      log?.append(article);
+      article.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    };
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const text = input?.value.trim();
+      if (!text || !endpoint) {
+        return;
+      }
+
+      messages.push({ role: 'user', content: text });
+      appendEntry('user', text);
+      input.value = '';
+      input.setAttribute('disabled', 'disabled');
+      status.textContent = 'Querying local model';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ messages })
+        });
+
+        const payload = await response.json();
+        if (!response.ok || !payload.reply) {
+          throw new Error(payload.detail || payload.error || 'Unknown error');
+        }
+
+        messages.push({ role: 'assistant', content: payload.reply });
+        appendEntry('assistant', payload.reply);
+        status.textContent = `Answered with ${payload.model || 'local model'}`;
+      } catch (error) {
+        appendEntry(
+          'system',
+          `The assistant is unavailable. ${error instanceof Error ? error.message : String(error)}`
+        );
+        status.textContent = 'Model bridge unavailable';
+      } finally {
+        input.removeAttribute('disabled');
+        input.focus();
+      }
+    });
+  </script>
+</BaseLayout>
