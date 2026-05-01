@@ -1,9 +1,9 @@
 ---
-title: "DEMETRA"
+title: "DEMETRA (NODES)"
 excerpt: "Precision agriculture and robotic monitoring platform developed as part of the NODES network."
 year: 2024
 status: "ongoing"
-tags: ["agriculture", "robotics", "nodes"]
+tags: ["agriculture", "virtual-reality", "haptic"]
 featured: true
 cover: "/images/projects/demetra.png"
 ---
