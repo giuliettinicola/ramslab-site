@@ -48,15 +48,48 @@ const project = {
       </div>
     </section>
 
-    <!-- SECTION 2: VISION -->
-    <section class="section vision-section">
-      <div class="bg-media vision-bg">
-        <img src={withBase('/images/projects/demetra-vision-bg.png')} alt="Vision Background" />
-      </div>
-      <div class="content">
-        <blockquote class="vision-quote">
-          {project.vision}
-        </blockquote>
+    <!-- SECTION 2: VISION (Scrollytelling - In-place transitions) -->
+    <section class="vision-scrolly" id="vision-scrolly">
+      <div class="sticky-container">
+        <div class="bg-media">
+          <video 
+            src={withBase('/videos/projects/demetra_VR.mp4')} 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="vision-bg-video"
+          ></video>
+          <div class="bg-overlay"></div>
+        </div>
+        
+        <div class="side-video-container">
+          <div class="side-video-frame">
+            <video 
+              src={withBase('/videos/projects/Locomotion.mp4')} 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              class="side-video"
+            ></video>
+          </div>
+        </div>
+
+        <div class="phrase-container">
+          <div class="vision-phrase active" data-index="0">
+            <blockquote class="vision-quote">Redefining agricultural precision through immersive virtual environments and robotic simulation.</blockquote>
+          </div>
+          <div class="vision-phrase" data-index="1">
+            <blockquote class="vision-quote">Unlimited Locomotion</blockquote>
+          </div>
+          <div class="vision-phrase" data-index="2">
+            <blockquote class="vision-quote">High Fidelity Tree Reconstruction</blockquote>
+          </div>
+          <div class="vision-phrase" data-index="3">
+            <blockquote class="vision-quote">One-to-One Haptic Feedback with sensorized Pruning Shear</blockquote>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -168,7 +201,6 @@ const project = {
     background-color: var(--color-bg-dark);
     color: white;
     font-family: var(--font-tech);
-    overflow-x: hidden;
   }
 
   /* FIXED UI */
@@ -262,19 +294,101 @@ const project = {
     opacity: 0.7;
   }
 
-  /* VISION */
-  .vision-section {
+  /* VISION SCROLLY */
+  .vision-scrolly {
+    position: relative;
+    height: 250vh; /* Reduced to eliminate gap */
     background-color: #050505;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: visible;
+  }
+
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10%;
+    background-color: #000;
+  }
+
+  .vision-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(2.0); /* Extreme zoom to hide pillarbox */
+    object-fit: cover;
+    opacity: 0.3;
+    display: block;
+  }
+
+  .side-video-container {
+    position: relative;
+    z-index: 2;
+    width: 450px;
+    max-width: 45vw;
+  }
+
+  .side-video-frame {
+    border: 1px solid var(--color-green-primary);
+    padding: 2px;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  }
+
+  .side-video {
+    width: 100%;
+    display: block;
+  }
+
+  .phrase-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .vision-phrase {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(10px);
+    max-width: 700px;
+  }
+
+  .vision-phrase.active {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .vision-quote {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
     font-weight: 300;
     line-height: 1.1;
-    max-width: 1000px;
     color: white;
     text-align: left;
     margin: 0;
+  }
+
+  .reveal-slide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-slide.active {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* CONTENT SECTIONS */
@@ -505,7 +619,7 @@ const project = {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal, .reveal-slide').forEach(el => revealObserver.observe(el));
 
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
@@ -517,4 +631,34 @@ const project = {
       (bg as HTMLElement).style.transform = `translateY(${offset}px)`;
     });
   });
+
+  // Scrollytelling for vision phrases
+  const scrollySection = document.getElementById('vision-scrolly');
+  const phrases = document.querySelectorAll('.vision-phrase');
+  
+  if (scrollySection && phrases.length > 0) {
+    const handleScroll = () => {
+      const rect = scrollySection.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const viewHeight = window.innerHeight;
+      
+      // Calculate progress (0 to 1) within the scrollable range of the section
+      let progress = -rect.top / (sectionHeight - viewHeight);
+      progress = Math.max(0, Math.min(1, progress));
+      
+      const index = Math.min(
+        Math.floor(progress * phrases.length),
+        phrases.length - 1
+      );
+      
+      phrases.forEach((p, i) => {
+        if (i === index) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+  }
 </script>
