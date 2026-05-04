@@ -31,7 +31,11 @@ const projects = (await getCollection('projects')).sort((a, b) => {
             {projects.map((project) => (
               <ArchiveItem
                 title={project.data.title}
-                href={entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : undefined}
+                href={
+                  entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
+                  entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
+                  undefined
+                }
                 text={project.data.excerpt}
                 left={[project.data.year ? String(project.data.year) : 'Undated', project.data.status ?? 'Project record']}
                 right={[
