@@ -1,0 +1,533 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/assets';
+
+const project = {
+  title: "COMPOSITE MANUFACTURING",
+  subtitle: "Advanced Carbon Fiber & Robotic Fabrication",
+  vision: "Pushing the boundaries of structural efficiency through automated material deposition and intelligent process control.",
+  description: "This research focuses on the intersection of robotics and composite materials. We develop novel manufacturing strategies for carbon fiber reinforced polymers (CFRP), leveraging robotic arms for precise fiber placement, automated layup, and in-situ monitoring to achieve unprecedented performance in aerospace and automotive applications.",
+  publications: [
+    { title: "Dynamic Modeling of Robotic Fiber Placement", url: "#" },
+    { title: "Soft Robotic Grippers for Composite Material Handling", url: "#" },
+    { title: "In-Situ Thermal Monitoring for Defect Prediction in CFRP", url: "#" }
+  ],
+  team: [
+    { name: "Marco Carnevale", role: "Principal Investigator" },
+    { name: "RAMS Lab Team", role: "Researchers & Developers" },
+    { name: "Carol Sergenti", role: "Researcher" }
+  ],
+  consortium: [
+    "University of Pavia",
+    "RAMS Lab",
+    "DIII — Department of Industrial and Information Engineering"
+  ]
+};
+---
+
+<BaseLayout title={`${project.title} — Research`}>
+  <div class="scrolly-container">
+    <!-- FIXED LOGO OVERLAY -->
+    <div class="fixed-ui">
+      <div class="brand-logos">
+        <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        <div class="logo-separator"></div>
+        <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+      </div>
+    </div>
+
+    <!-- SECTION 1: HERO -->
+    <section class="section hero-section">
+      <div class="bg-media">
+        <img src={withBase('/images/projects/carbon-fiber-bg.png')} alt="Hero Background" class="parallax-bg" />
+        <div class="bg-overlay"></div>
+      </div>
+      <div class="content">
+        <h1 class="title-main">{project.title}</h1>
+        <p class="subtitle">{project.subtitle}</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: VISION -->
+    <section class="section vision-section">
+      <div class="bg-media vision-bg">
+        <img src={withBase('/images/projects/carbon-fiber-bg.png')} alt="Vision Background" />
+        <div class="bg-overlay dark-overlay"></div>
+      </div>
+      <div class="content">
+        <blockquote class="vision-quote">
+          {project.vision}
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- SECTION 3: MODULAR CONTENT - THE SYSTEM -->
+    <section class="section content-section nature-bg">
+      <div class="bg-media">
+        <img src={withBase('/images/projects/carbon-fiber-bg.png')} alt="Texture" class="parallax-bg" />
+        <div class="bg-overlay medium-overlay"></div>
+      </div>
+      <div class="content-grid container">
+        <div class="text-block reveal">
+          <h2 class="section-label">Material Deposition</h2>
+          <p>Robotic arms enable precise fiber placement, optimizing structural integrity and minimizing material waste during the layup process.</p>
+        </div>
+        <div class="visual-block reveal">
+          <div class="tech-video-container">
+            <video 
+              src="" 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              class="tech-video"
+            >
+              <div class="video-placeholder">Robotic Fabrication Video</div>
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MODULAR CONTENT - TRAINING -->
+    <section class="section content-section alternate">
+      <div class="content-grid container">
+        <div class="visual-block reveal">
+          <div class="abstract-viz">
+            <div class="viz-line"></div>
+            <div class="viz-line delay-1"></div>
+            <div class="viz-line delay-2"></div>
+          </div>
+        </div>
+        <div class="text-block reveal">
+          <h2 class="section-label">In-Situ Monitoring</h2>
+          <p>Real-time thermal and stress analytics guide the manufacturing process, ensuring high-performance composite structures and rapid defect detection.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: RECAP (Redesigned as Information Box) -->
+    <section class="recap-section">
+      <div class="container">
+        <div class="info-box">
+          <div class="info-grid">
+            <div class="info-column main-info">
+              <h2 class="info-label">Description</h2>
+              <p class="info-description">{project.description}</p>
+            </div>
+            
+            <div class="info-column side-info">
+              <div class="info-group">
+                <h3 class="info-label">Publications</h3>
+                <ul class="info-list">
+                  {project.publications.map(pub => (
+                    <li><a href={pub.url}>{pub.title}</a></li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="info-group">
+                <h3 class="info-label">Team</h3>
+                <ul class="info-list">
+                  {project.team.map(member => (
+                    <li>
+                      <span class="member-name">{member.name}</span>
+                      <span class="member-role">{member.role}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="info-group">
+                <h3 class="info-label">Consortium</h3>
+                <ul class="info-list">
+                  {project.consortium.map(entity => (
+                    <li>{entity}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="info-footer">
+            <a href={withBase('/projects/')} class="back-link">← Return to Projects</a>
+          </footer>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  :root {
+    --color-primary: #ffffff;
+    --color-dark: #333333;
+    --color-light: #f5f5f5;
+    --color-bg-dark: #050505;
+    --font-tech: 'Inter', system-ui, sans-serif;
+  }
+
+  .scrolly-container {
+    background-color: var(--color-bg-dark);
+    color: white;
+    font-family: var(--font-tech);
+    overflow-x: hidden;
+  }
+
+  /* FIXED UI */
+  .fixed-ui {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+  }
+
+  .brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0.9;
+    mix-blend-mode: exclusion;
+  }
+
+  .logo-unipv {
+    height: 60px;
+    filter: brightness(0) invert(1);
+  }
+
+  .logo-ramslab {
+    height: 45px;
+  }
+
+  .logo-separator {
+    width: 1px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* SECTION BASE */
+  .section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .bg-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .bg-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.85));
+  }
+
+  .dark-overlay {
+    background: rgba(5, 5, 5, 0.6);
+  }
+
+  .medium-overlay {
+    background: rgba(5, 5, 5, 0.4);
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+  }
+
+  /* HERO */
+  .title-main {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin: 0;
+    line-height: 0.9;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    opacity: 0.7;
+    color: var(--color-light);
+  }
+
+  /* VISION */
+  .vision-section {
+    background-color: var(--color-bg-dark);
+  }
+
+  .vision-quote {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 1000px;
+    color: white;
+    text-align: left;
+    margin: 0;
+  }
+
+  /* CONTENT SECTIONS */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    padding: 0 4rem;
+  }
+
+  .alternate .content-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .section-label {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .text-block p {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    opacity: 0.9;
+    max-width: 450px;
+    color: var(--color-light);
+  }
+
+  /* RECAP SECTION - INFORMATION BOX */
+  .recap-section {
+    padding: 120px 0;
+    background-color: white;
+    color: black;
+  }
+
+  .info-box {
+    background-color: #f5f5f5; /* Light grey instead of green */
+    border-radius: 4px;
+    padding: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 24px;
+    color: #666;
+    font-weight: 700;
+  }
+
+  .info-description {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    font-weight: 400;
+    color: #111;
+  }
+
+  .info-group {
+    margin-bottom: 48px;
+  }
+
+  .info-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .info-list li {
+    padding: 16px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .info-list li:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .info-list a {
+    color: black;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .info-list a:hover {
+    opacity: 0.6;
+  }
+
+  .member-name {
+    display: block;
+    font-weight: 600;
+  }
+
+  .member-role {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .info-footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: left;
+  }
+
+  .back-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  .back-link:hover {
+    color: black;
+  }
+
+  /* ANIMATIONS */
+  .parallax-bg {
+    transition: transform 0.1s ease-out;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tech-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border: 1px solid var(--color-dark);
+    overflow: hidden;
+  }
+
+  .tech-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-light);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: linear-gradient(45deg, #111, #222);
+  }
+
+  .abstract-viz {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .viz-line {
+    height: 2px;
+    background: var(--color-light);
+    width: 100%;
+    animation: pulse 4s infinite;
+  }
+
+  .delay-1 { animation-delay: 1s; }
+  .delay-2 { animation-delay: 2s; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; transform: scaleX(0.8); }
+    50% { opacity: 1; transform: scaleX(1); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+    .info-box { padding: 30px; }
+    .info-grid { grid-template-columns: 1fr; gap: 40px; }
+    .info-description { font-size: 1.4rem; }
+    .fixed-ui { top: 1rem; left: 1rem; }
+    .brand-logos { gap: 1rem; }
+    .logo-unipv { height: 40px; }
+    .logo-ramslab { height: 30px; }
+  }
+</style>
+
+<script>
+  // Simple scrollytelling logic
+  const sections = document.querySelectorAll('.section');
+  const parallaxBgs = document.querySelectorAll('.parallax-bg');
+
+  // Reveal elements on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    
+    // Parallax effect
+    parallaxBgs.forEach(bg => {
+      const speed = 0.2;
+      const offset = scrollY * speed;
+      (bg as HTMLElement).style.transform = `translateY(${offset}px)`;
+    });
+  });
+</script>
