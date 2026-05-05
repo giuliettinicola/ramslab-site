@@ -604,8 +604,12 @@ const project = {
     private isAnimating = false;
 
     constructor(containerId: string, private modelPath: string) {
+      console.log("TreeAnimation: Initializing with model:", modelPath);
       const container = document.getElementById(containerId);
-      if (!container) return;
+      if (!container) {
+        console.error("TreeAnimation: Container not found:", containerId);
+        return;
+      }
       this.container = container;
 
       this.scene = new THREE.Scene();
@@ -718,6 +722,14 @@ const project = {
         this.modelGroup.position.y -= (size.y * scaleFactor) * 0.4;
 
         this.setupTimeline();
+      }, 
+      (xhr) => {
+        // Progress
+        console.log(`TreeAnimation: ${(xhr.loaded / xhr.total * 100)}% loaded`);
+      },
+      (error) => {
+        // Error
+        console.error("TreeAnimation: Error loading model:", error);
       });
     }
 
