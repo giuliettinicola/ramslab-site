@@ -39,7 +39,14 @@ const project = {
     <!-- SECTION 1: HERO -->
     <section class="section hero-section">
       <div class="bg-media">
-        <img src={withBase('/images/projects/demetra-hero-bg.png')} alt="Hero Background" class="parallax-bg" />
+        <video 
+          src={withBase('/videos/projects/0505(1).mp4')} 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="hero-bg-video"
+        ></video>
         <div class="bg-overlay"></div>
       </div>
       <div class="content">
@@ -49,45 +56,34 @@ const project = {
     </section>
 
     <!-- SECTION 2: VISION (Scrollytelling - In-place transitions) -->
-    <section class="vision-scrolly" id="vision-scrolly">
-      <div class="sticky-container">
-        <div class="bg-media">
-          <video 
-            src={withBase('/videos/projects/demetra_VR.mp4')} 
-            autoplay 
-            loop 
-            muted 
-            playsinline 
-            class="vision-bg-video"
-          ></video>
-          <div class="bg-overlay"></div>
+    <!-- SECTION 2: UNLIMITED LOCOMOTION -->
+    <section class="section content-section locomotion-bg">
+      <div class="bg-media">
+        <video 
+          src={withBase('/videos/projects/0505(3).mp4')} 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="hero-bg-video"
+        ></video>
+        <div class="bg-overlay"></div>
+      </div>
+      <div class="content-grid container">
+        <div class="text-block reveal">
+          <h2 class="section-label">Unlimited Locomotion</h2>
+          <p>Step into the Infinite. With our integrated omnidirectional treadmill, the digital twin becomes a boundless environment. Navigate through miles of virtual rows with the freedom of physical walking, bridging the gap between simulator and reality.</p>
         </div>
-        
-        <div class="side-video-container">
-          <div class="side-video-frame">
+        <div class="visual-block reveal">
+          <div class="tech-video-container side-sync-video">
             <video 
-              src={withBase('/videos/projects/Locomotion.mp4')} 
+              src={withBase('/videos/projects/0505(4).mp4')} 
               autoplay 
               loop 
               muted 
               playsinline 
-              class="side-video"
+              class="tech-video"
             ></video>
-          </div>
-        </div>
-
-        <div class="phrase-container">
-          <div class="vision-phrase active" data-index="0">
-            <blockquote class="vision-quote">Redefining agricultural precision through immersive virtual environments and robotic simulation.</blockquote>
-          </div>
-          <div class="vision-phrase" data-index="1">
-            <blockquote class="vision-quote">Unlimited Locomotion</blockquote>
-          </div>
-          <div class="vision-phrase" data-index="2">
-            <blockquote class="vision-quote">High Fidelity Tree Reconstruction</blockquote>
-          </div>
-          <div class="vision-phrase" data-index="3">
-            <blockquote class="vision-quote">One-to-One Haptic Feedback with sensorized Pruning Shear</blockquote>
           </div>
         </div>
       </div>
@@ -294,91 +290,25 @@ const project = {
     opacity: 0.7;
   }
 
-  /* VISION SCROLLY */
-  .vision-scrolly {
-    position: relative;
-    height: 250vh; /* Reduced to eliminate gap */
+  /* LOCOMOTION SECTION */
+  .locomotion-bg {
     background-color: #050505;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    overflow: visible;
   }
 
-  .sticky-container {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 10%;
-    background-color: #000;
-  }
-
-  .vision-bg-video {
+  .hero-bg-video {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 100%;
     height: 100%;
-    transform: translate(-50%, -50%) scale(2.0); /* Extreme zoom to hide pillarbox */
+    transform: translate(-50%, -50%);
     object-fit: cover;
-    opacity: 0.3;
+    opacity: 0.4;
     display: block;
+    z-index: 0;
   }
 
-  .side-video-container {
-    position: relative;
-    z-index: 2;
-    width: 450px;
-    max-width: 45vw;
-  }
 
-  .side-video-frame {
-    border: 1px solid var(--color-green-primary);
-    padding: 2px;
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-  }
-
-  .side-video {
-    width: 100%;
-    display: block;
-  }
-
-  .phrase-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    padding-left: 10%;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .vision-phrase {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(10px);
-    max-width: 700px;
-  }
-
-  .vision-phrase.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .vision-quote {
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    color: white;
-    text-align: left;
-    margin: 0;
-  }
 
   .reveal-slide {
     opacity: 0;
@@ -399,6 +329,13 @@ const project = {
     align-items: center;
     width: 100%;
     padding: 0 4rem;
+  }
+
+  .visual-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   .alternate .content-grid {
@@ -554,6 +491,16 @@ const project = {
     object-fit: cover;
   }
 
+  .side-sync-video {
+    aspect-ratio: 9 / 16 !important;
+    width: 280px !important;
+    height: auto !important;
+    margin: 0 auto;
+    transform: translateX(60px);
+    border: 2px solid var(--color-green-primary) !important;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+  }
+
   .video-placeholder {
     position: absolute;
     inset: 0;
@@ -590,6 +537,10 @@ const project = {
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
+    .side-sync-video {
+      transform: translateX(0);
+      width: 240px !important;
+    }
     .content-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -632,33 +583,5 @@ const project = {
     });
   });
 
-  // Scrollytelling for vision phrases
-  const scrollySection = document.getElementById('vision-scrolly');
-  const phrases = document.querySelectorAll('.vision-phrase');
-  
-  if (scrollySection && phrases.length > 0) {
-    const handleScroll = () => {
-      const rect = scrollySection.getBoundingClientRect();
-      const sectionHeight = rect.height;
-      const viewHeight = window.innerHeight;
-      
-      // Calculate progress (0 to 1) within the scrollable range of the section
-      let progress = -rect.top / (sectionHeight - viewHeight);
-      progress = Math.max(0, Math.min(1, progress));
-      
-      const index = Math.min(
-        Math.floor(progress * phrases.length),
-        phrases.length - 1
-      );
-      
-      phrases.forEach((p, i) => {
-        if (i === index) p.classList.add('active');
-        else p.classList.remove('active');
-      });
-    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check
-    handleScroll();
-  }
 </script>
