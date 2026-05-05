@@ -30,9 +30,13 @@ const project = {
     <!-- FIXED LOGO OVERLAY -->
     <div class="fixed-ui">
       <div class="brand-logos">
-        <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
+          <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        </a>
         <div class="logo-separator"></div>
-        <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        <a href={withBase('/')}>
+          <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        </a>
       </div>
     </div>
 
