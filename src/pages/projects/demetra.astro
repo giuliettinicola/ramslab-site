@@ -6,22 +6,12 @@ const project = {
   title: "DEMETRA",
   subtitle: "Pruning Virtual Training Simulator",
   vision: "Redefining agricultural precision through immersive virtual environments and robotic simulation.",
-  description: "DEMETRA is an advanced research platform focused on the digitization of pruning techniques. By combining high-fidelity physics simulations with immersive virtual reality, the project provides a safe and optimized environment for training agricultural workers and testing robotic pruning algorithms.",
+  description: "DEMETRA is an innovative research platform dedicated to the digitization of pruning techniques and the advancement of agricultural training. At its core, the project leverages a human-in-the-loop approach, placing the operator inside a highly immersive virtual environment. By seamlessly integrating advanced technologies, such as omnidirectional locomotion systems and authentic haptic interfaces, DEMETRA allows users to move freely and physically interact with digital plants exactly as they would in a real orchard. Beyond offering an unprecedented, safe, and optimized environment for upskilling agricultural workers, the platform serves a dual purpose. By combining high-fidelity physics simulations with precise digital twins, DEMETRA provides a robust, risk-free testing ground for validating and refining automated robotic pruning algorithms, shaping the future of smart agriculture.",
   publications: [
-    { title: "Virtual Reality for Agricultural Training: The DEMETRA Platform", url: "#" },
-    { title: "Real-time Simulation of Pruning Dynamics in Virtual Environments", url: "#" },
-    { title: "Robotic Pruning: A Survey of Simulation-to-Real Transfer", url: "#" }
+    { title: "An Immersive Hazelnut Tree Pruning Simulator for Agricultural Operator Training", url: "https://doi.org/10.1109/MetroXRAINE66377.2025.11340139" },
+    { title: "Design of an Environment for Virtual Training Based on Digital Reconstruction: From Real Vegetation to Its Tactile Simulation", url: "https://doi.org/10.3390/designs9020032" }
   ],
-  team: [
-    { name: "Marco Carnevale", role: "Principal Investigator" },
-    { name: "RAMS Lab Team", role: "Researchers & Developers" },
-    { name: "University of Pavia", role: "Institutional Partner" }
-  ],
-  consortium: [
-    "University of Pavia",
-    "RAMS Lab",
-    "DIII — Department of Industrial and Information Engineering"
-  ]
+  funding: "Produced within the NODES project, financed by the MUR on M4C2 funds - Investment 1.5 'Innovation Ecosystems', within the PNRR financed by the European Union - NextGenerationEU (Grant agreement Cod. n.ECS00000036)."
 };
 ---
 
@@ -75,8 +65,7 @@ const project = {
       <div class="content-grid container">
         <div class="text-block reveal">
           <h2 class="section-label">Unlimited Locomotion</h2>
-          <p>Step into the Infinite. With our integrated omnidirectional treadmill, the digital twin becomes a boundless environment. Navigate through miles of virtual rows with the freedom of physical walking, bridging the gap between simulator and reality.</p>
-        </div>
+          <p>Walk naturally through the virtual rows as if you were in the field. Explore the entire environment and select any tree with total freedom of movement.</div>
         <div class="visual-block reveal">
           <div class="tech-video-container side-sync-video">
             <video 
@@ -100,8 +89,7 @@ const project = {
       <div class="content-grid container">
         <div class="text-block reveal">
           <h2 class="section-label">Digital Twin</h2>
-          <p>The system creates a perfect digital replica of agricultural environments, allowing for the precise modeling of tree morphology and pruning responses.</p>
-        </div>
+          <p>From high-resolution photogrammetry to high-fidelity virtual models. Real trees are reconstructed with absolute precision, allowing for realistic pruning simulations.</div>
         <div class="visual-block reveal">
           <div id="tree-canvas-container" class="tree-3d-container" data-model={withBase('/models/tree_old.glb')}></div>
         </div>
@@ -119,8 +107,9 @@ const project = {
           </div>
         </div>
         <div class="text-block reveal">
-          <h2 class="section-label">Skill Acquisition</h2>
-          <p>Real-time haptic feedback and visual analytics guide the user through complex pruning decisions, accelerating the learning curve for sustainable practices.</p>
+          <h2 class="section-label">Real-Tool Integration</h2>
+          <p>Erase the boundary between simulation and practice by using real pruning tools. Experience one-to-one haptic feedback in a real-time, accelerating skill acquisition through a natural and familiar tactile experience.</p>
+          <div id="shear-canvas-container" class="shear-3d-container" data-model={withBase('/models/shear.glb')}></div>
         </div>
       </div>
     </section>
@@ -140,30 +129,14 @@ const project = {
                 <h3 class="info-label">Publications</h3>
                 <ul class="info-list">
                   {project.publications.map(pub => (
-                    <li><a href={pub.url}>{pub.title}</a></li>
+                    <li><a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a></li>
                   ))}
                 </ul>
               </div>
 
               <div class="info-group">
-                <h3 class="info-label">Team</h3>
-                <ul class="info-list">
-                  {project.team.map(member => (
-                    <li>
-                      <span class="member-name">{member.name}</span>
-                      <span class="member-role">{member.role}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div class="info-group">
-                <h3 class="info-label">Consortium</h3>
-                <ul class="info-list">
-                  {project.consortium.map(entity => (
-                    <li>{entity}</li>
-                  ))}
-                </ul>
+                <h3 class="info-label">Funding</h3>
+                <p class="funding-text">{project.funding}</p>
               </div>
             </div>
           </div>
@@ -266,8 +239,7 @@ const project = {
   .info-list { list-style: none; padding: 0; margin: 0; }
   .info-list li { padding: 16px 0; border-top: 1px solid rgba(0, 0, 0, 0.08); font-size: 1.1rem; }
   .info-list a { color: black; text-decoration: none; }
-  .member-name { display: block; font-weight: 600; }
-  .member-role { font-size: 0.85rem; color: #666; }
+  .funding-text { font-size: 1rem; line-height: 1.5; color: #333; }
   .info-footer { margin-top: 60px; padding-top: 32px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
   .back-link { color: #666; text-decoration: none; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
@@ -285,6 +257,14 @@ const project = {
     cursor: grab;
   }
   .tree-3d-container:active { cursor: grabbing; }
+
+  .shear-3d-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    margin-top: 2rem;
+    z-index: 1;
+  }
 
   .tech-video { width: 100%; height: 100%; object-fit: cover; }
   .side-sync-video {
@@ -481,6 +461,153 @@ const project = {
 
       const modelPath = container.getAttribute('data-model') || '';
       if (modelPath) new TreeAnimation(modelPath);
+
+      // Shear Animation Setup
+      const shearContainer = document.getElementById('shear-canvas-container');
+      if (shearContainer) {
+        const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+        
+        class ShearAnimation {
+          private scene = new THREE.Scene();
+          private camera: THREE.PerspectiveCamera;
+          private renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+          private modelGroup = new THREE.Group();
+          private isAnimating = false;
+          private modelLoaded = false;
+          
+          private bladeMesh: THREE.Object3D | null = null;
+          private triggerMesh: THREE.Object3D | null = null;
+          
+          private targetClose = 0;
+          private currentClose = 0;
+
+          constructor(private container: HTMLElement, private modelPath: string) {
+            this.camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            this.init();
+          }
+
+          private init() {
+            this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.container.appendChild(this.renderer.domElement);
+
+            this.camera.position.set(0, 0, 5);
+            this.scene.add(this.modelGroup);
+
+            // Lighting for realistic metallic material
+            const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+            this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            this.scene.add(ambientLight);
+            
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            dirLight.position.set(2, 5, 5);
+            this.scene.add(dirLight);
+
+            this.setupEventListeners();
+            this.animate();
+          }
+
+          private loadModel() {
+            const loader = new GLTFLoader();
+            loader.load(this.modelPath, (gltf) => {
+              const model = gltf.scene;
+              
+              model.traverse((child) => {
+                const name = child.name.toLowerCase();
+                
+                // Grab the first object (usually parent group) that matches the name
+                if (name.includes('blade') && !this.bladeMesh) this.bladeMesh = child;
+                if (name.includes('trigger') && !this.triggerMesh) this.triggerMesh = child;
+                
+                if ((child as THREE.Mesh).isMesh) {
+                  const mesh = child as THREE.Mesh;
+                  // Ensure shiny metal material
+                  if (mesh.material instanceof THREE.MeshStandardMaterial) {
+                    mesh.material.metalness = 0.9;
+                    mesh.material.roughness = 0.2;
+                    mesh.material.envMapIntensity = 1.0;
+                    mesh.material.needsUpdate = true;
+                  }
+                }
+              });
+
+              // Calculate bounding box and center
+              const box = new THREE.Box3().setFromObject(model);
+              const center = box.getCenter(new THREE.Vector3());
+              const size = box.getSize(new THREE.Vector3());
+              
+              this.modelGroup.add(model);
+              model.position.sub(center);
+              
+              // Scale to fit the container
+              const maxDim = Math.max(size.x, size.y, size.z);
+              const scaleFactor = 4.5 / maxDim;
+              this.modelGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+              // Present at an angle
+              this.modelGroup.rotation.y = Math.PI / 4;
+              this.modelGroup.rotation.x = Math.PI / 12;
+            });
+          }
+
+          private setupEventListeners() {
+            const obs = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  this.isAnimating = true;
+                  if (!this.modelLoaded) { 
+                    this.modelLoaded = true; 
+                    this.loadModel(); 
+                  }
+                } else {
+                  this.isAnimating = false;
+                }
+              });
+            }, { threshold: 0.1 });
+            obs.observe(this.container);
+            this.container.addEventListener('wheel', (e) => {
+              e.preventDefault();
+              const sensitivity = 0.0015;
+              this.targetClose += e.deltaY * sensitivity;
+              this.targetClose = Math.max(0, Math.min(1, this.targetClose));
+            }, { passive: false });
+            
+            window.addEventListener('resize', () => {
+              if (!this.container) return;
+              this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+              this.camera.updateProjectionMatrix();
+              this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            });
+          }
+
+          private animate() {
+            requestAnimationFrame(() => this.animate());
+            if (!this.isAnimating) return;
+
+            // Interpolate for smooth closing
+            this.currentClose += (this.targetClose - this.currentClose) * 0.1;
+
+            if (this.bladeMesh) {
+              // Blade rotation (almost double)
+              this.bladeMesh.rotation.z = -this.currentClose * (Math.PI / 3.5);
+            }
+            if (this.triggerMesh) {
+              // Trigger rotation (half of blade)
+              this.triggerMesh.rotation.z = -this.currentClose * (Math.PI / 7);
+            }
+
+            // Gentle idle rotation
+            this.modelGroup.rotation.y += 0.002;
+
+            this.renderer.render(this.scene, this.camera);
+          }
+        }
+
+        const shearModelPath = shearContainer.getAttribute('data-model') || '';
+        if (shearModelPath) new ShearAnimation(shearContainer, shearModelPath);
+      }
 
     } catch (e) {
       console.error("Three.js failed to load:", e);
