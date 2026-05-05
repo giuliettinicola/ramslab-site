@@ -639,17 +639,16 @@ const project = {
       this.controls.enablePan = false;
       this.controls.minPolarAngle = Math.PI / 2.2; 
       this.controls.maxPolarAngle = Math.PI / 1.8;
-      this.controls.enabled = false; // Disable until timeline finishes
+      this.controls.enabled = false; 
 
       // Lights
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); // Brighter ambient
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); 
       this.scene.add(ambientLight);
       
-      const pointLight = new THREE.PointLight(0xffffff, 2.0); // Brighter light for textures
+      const pointLight = new THREE.PointLight(0xffffff, 2.0); 
       pointLight.position.set(10, 20, 10);
       this.scene.add(pointLight);
 
-      this.loadModel();
       this.setupEventListeners();
       this.animate();
     }
@@ -659,10 +658,12 @@ const project = {
 
       loader.load(this.modelPath, (gltf) => {
         const model = gltf.scene;
+        console.log("TreeAnimation: Model loaded successfully", model);
         
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
+        console.log("TreeAnimation: Model size:", size, "Center:", center);
         
         model.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
@@ -721,7 +722,10 @@ const project = {
         this.modelGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
         this.modelGroup.position.y -= (size.y * scaleFactor) * 0.4;
 
+        console.log("TreeAnimation: Scene setup complete, starting timeline");
         this.setupTimeline();
+        // Force play if already intersecting
+        if (this.isAnimating) this.timeline?.play();
       }, 
       (xhr) => {
         // Progress
@@ -762,6 +766,7 @@ const project = {
       this.timeline.to([...pMats, ...wMats], { opacity: 0.1, duration: 3 }, 5);
     }
 
+    private modelLoaded = false;
     private setupEventListeners() {
       window.addEventListener('resize', () => {
         this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
@@ -773,12 +778,17 @@ const project = {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             this.isAnimating = true;
+            // Lazy load model only when near
+            if (!this.modelLoaded) {
+              this.modelLoaded = true;
+              this.loadModel();
+            }
             this.timeline?.play();
           } else {
             this.isAnimating = false;
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.1 }); // Trigger earlier
 
       observer.observe(this.container);
     }
