@@ -238,9 +238,13 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
 </head>
 <body class="carbon-bg">
   <header class="fixed-header">
-    <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" />
+    <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
+      <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" />
+    </a>
     <div class="separator"></div>
-    <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMSLAB" />
+    <a href={withBase('/')}>
+      <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMSLAB" />
+    </a>
   </header>
 
   <a href={withBase('/projects/')} class="back-btn">Back</a>
@@ -268,7 +272,16 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
         <p>By leveraging digital twin technologies and finite element analysis, we predict the behavior of complex carbon fiber weaves under extreme loads. This allows for rapid iteration without the need for physical prototypes.</p>
         <p>Our approach minimizes material waste and optimizes the strength-to-weight ratio for aerospace and automotive applications.</p>
       </div>
-      <div class="module-visual"></div>
+      <div class="module-visual">
+        <video 
+          src={withBase('/videos/projects/CF.mp4')} 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          style="width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1;"
+        ></video>
+      </div>
     </div>
   </section>
 
