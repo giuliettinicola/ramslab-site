@@ -54,6 +54,7 @@ const introColumns = [
         {featuredProjects.map((project) => (
           <ProjectCard
             href={
+              entrySlug(project.id) === 'dynamica-prin' ? withBase('/projects/dynamica/') : 
               entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
               entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
               undefined

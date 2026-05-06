@@ -98,18 +98,16 @@ const project = {
 
     <!-- SECTION 4: TRAINING -->
     <section class="section content-section alternate">
+    <div class="bg-media">
+        <img src={withBase('/images/projects/demetra-nature-texture.png')} alt="Nature Texture" class="parallax-bg" />
+      </div>
       <div class="content-grid container">
         <div class="visual-block reveal">
-          <div class="abstract-viz">
-            <div class="viz-line"></div>
-            <div class="viz-line delay-1"></div>
-            <div class="viz-line delay-2"></div>
-          </div>
+          <div id="shear-canvas-container" class="shear-3d-container" data-model={withBase('/models/shear.glb')}></div>
         </div>
         <div class="text-block reveal">
           <h2 class="section-label">Real-Tool Integration</h2>
           <p>Erase the boundary between simulation and practice by using real pruning tools. Experience one-to-one haptic feedback in a real-time, accelerating skill acquisition through a natural and familiar tactile experience.</p>
-          <div id="shear-canvas-container" class="shear-3d-container" data-model={withBase('/models/shear.glb')}></div>
         </div>
       </div>
     </section>
@@ -261,8 +259,7 @@ const project = {
   .shear-3d-container {
     position: relative;
     width: 100%;
-    height: 450px;
-    margin-top: 2rem;
+    height: 600px;
     z-index: 1;
   }
 
