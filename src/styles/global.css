@@ -809,7 +809,7 @@ ol {
 
 .site-footer {
   border-top: 1px solid #000000;
-  padding: 22px 0 32px;
+  padding: 36px 0;
   background: #000000;
   color: #ffffff;
 }
@@ -838,7 +838,7 @@ ol {
 
 .footer-brandmark {
   display: inline-block;
-  width: 170px;
+  width: 276px;
 }
 
 .footer-brandmark img {
@@ -856,9 +856,6 @@ ol {
   gap: 12px;
 }
 
-.footer-ramslab {
-  width: 194px;
-}
 
 .sr-only {
   position: absolute;
