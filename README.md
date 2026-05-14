@@ -12,3 +12,5 @@ Open `http://localhost:4321/`
 - Replace placeholder content only after the shell matches the reference
 - For current project status, deployment notes, and continuation guidance, read `SITE_HANDOFF.md`
 - For future Codex sessions on this site, the normal workflow is: `npm run dev` -> edit -> visual check -> `npm run build` -> commit/push
+- For mac users use brew to install node and npm
+

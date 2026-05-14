@@ -30,9 +30,13 @@ const project = {
     <!-- FIXED LOGO OVERLAY -->
     <div class="fixed-ui">
       <div class="brand-logos">
-        <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
+          <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        </a>
         <div class="logo-separator"></div>
-        <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        <a href={withBase('/')}>
+          <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        </a>
       </div>
     </div>
 
@@ -75,7 +79,7 @@ const project = {
         <div class="visual-block reveal">
           <div class="tech-video-container">
             <video 
-              src="" 
+              src={withBase('/videos/projects/CF.mp4')} 
               autoplay 
               loop 
               muted 
@@ -89,15 +93,11 @@ const project = {
       </div>
     </section>
 
-    <!-- SECTION 4: MODULAR CONTENT - TRAINING -->
+    <!-- SECTION 4: 3D MODEL -->
     <section class="section content-section alternate">
       <div class="content-grid container">
         <div class="visual-block reveal">
-          <div class="abstract-viz">
-            <div class="viz-line"></div>
-            <div class="viz-line delay-1"></div>
-            <div class="viz-line delay-2"></div>
-          </div>
+          <div id="cf-canvas-container" class="cf-3d-container" data-model={withBase('/models/CF_motion.glb')}></div>
         </div>
         <div class="text-block reveal">
           <h2 class="section-label">In-Situ Monitoring</h2>
@@ -487,6 +487,16 @@ const project = {
     50% { opacity: 1; transform: scaleX(1); }
   }
 
+  /* 3D MODEL CONTAINER */
+  .cf-3d-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    z-index: 1;
+    cursor: grab;
+  }
+  .cf-3d-container:active { cursor: grabbing; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .content-grid {
@@ -494,6 +504,7 @@ const project = {
       gap: 2rem;
       padding: 0 2rem;
     }
+    .cf-3d-container { height: 400px; }
     .info-box { padding: 30px; }
     .info-grid { grid-template-columns: 1fr; gap: 40px; }
     .info-description { font-size: 1.4rem; }
@@ -505,29 +516,169 @@ const project = {
 </style>
 
 <script>
-  // Simple scrollytelling logic
-  const sections = document.querySelectorAll('.section');
-  const parallaxBgs = document.querySelectorAll('.parallax-bg');
+  // 1. REVEAL LOGIC (IMMEDIATE)
+  function initReveal() {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  // Reveal elements on scroll
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.parallax-bg').forEach(bg => {
+        const speed = 0.2;
+        (bg as HTMLElement).style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    });
+  }
+
+  // 2. THREE.JS LOGIC (PROTECTED)
+  async function initThree() {
+    const container = document.getElementById('cf-canvas-container');
+    if (!container) return;
+
+    try {
+      const THREE = await import('three');
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
+      const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+
+      class CFAnimation {
+        private scene = new THREE.Scene();
+        private camera: THREE.PerspectiveCamera;
+        private renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        private controls: InstanceType<typeof OrbitControls>;
+        private modelGroup = new THREE.Group();
+        private mixer: THREE.AnimationMixer | null = null;
+        private clock = new THREE.Clock();
+        private isAnimating = false;
+        private modelLoaded = false;
+
+        constructor(private containerEl: HTMLElement, private modelPath: string) {
+          this.camera = new THREE.PerspectiveCamera(45, containerEl.clientWidth / containerEl.clientHeight, 0.1, 100);
+          this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+          this.init();
+        }
+
+        private init() {
+          this.renderer.setSize(this.containerEl.clientWidth, this.containerEl.clientHeight);
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          this.containerEl.appendChild(this.renderer.domElement);
+
+          this.camera.position.set(0, 0, 5);
+          this.scene.add(this.modelGroup);
+
+          // Environment for realistic metallic / composite materials
+          const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+          this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+          this.scene.add(ambientLight);
+          const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+          dirLight.position.set(2, 5, 5);
+          this.scene.add(dirLight);
+
+          this.controls.enableDamping = true;
+          this.controls.dampingFactor = 0.05;
+          this.controls.enablePan = false;
+
+          this.setupEventListeners();
+          this.animate();
+        }
+
+        private loadModel() {
+          const loader = new GLTFLoader();
+          loader.load(this.modelPath, (gltf) => {
+            const model = gltf.scene;
+
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                if (mesh.material instanceof THREE.MeshStandardMaterial) {
+                  mesh.material.metalness = 0.9;
+                  mesh.material.roughness = 0.2;
+                  mesh.material.envMapIntensity = 1.0;
+                  mesh.material.needsUpdate = true;
+                }
+              }
+            });
+
+            // Center and scale
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            this.modelGroup.add(model);
+            model.position.sub(center);
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scaleFactor = 4.5 / maxDim;
+            this.modelGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+            // Present at a slight angle
+            this.modelGroup.rotation.y = Math.PI / 4;
+            this.modelGroup.rotation.x = Math.PI / 12;
+
+            // Play embedded animations if present
+            if (gltf.animations && gltf.animations.length > 0) {
+              this.mixer = new THREE.AnimationMixer(model);
+              gltf.animations.forEach((clip) => {
+                this.mixer!.clipAction(clip).play();
+              });
+            }
+          });
+        }
+
+        private setupEventListeners() {
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                this.isAnimating = true;
+                if (!this.modelLoaded) {
+                  this.modelLoaded = true;
+                  this.loadModel();
+                }
+              } else {
+                this.isAnimating = false;
+              }
+            });
+          }, { threshold: 0.1 });
+          obs.observe(this.containerEl);
+
+          window.addEventListener('resize', () => {
+            if (!this.containerEl) return;
+            this.camera.aspect = this.containerEl.clientWidth / this.containerEl.clientHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(this.containerEl.clientWidth, this.containerEl.clientHeight);
+          });
+        }
+
+        private animate() {
+          requestAnimationFrame(() => this.animate());
+          if (!this.isAnimating) return;
+
+          const delta = this.clock.getDelta();
+          if (this.mixer) this.mixer.update(delta);
+
+          this.controls.update();
+          this.renderer.render(this.scene, this.camera);
+        }
       }
-    });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      const modelPath = container.getAttribute('data-model') || '';
+      if (modelPath) new CFAnimation(container, modelPath);
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    
-    // Parallax effect
-    parallaxBgs.forEach(bg => {
-      const speed = 0.2;
-      const offset = scrollY * speed;
-      (bg as HTMLElement).style.transform = `translateY(${offset}px)`;
-    });
-  });
+    } catch (e) {
+      console.error("Three.js failed to load:", e);
+    }
+  }
+
+  // Execution
+  initReveal();
+  initThree();
 </script>

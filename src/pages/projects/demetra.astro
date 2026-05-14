@@ -6,22 +6,12 @@ const project = {
   title: "DEMETRA",
   subtitle: "Pruning Virtual Training Simulator",
   vision: "Redefining agricultural precision through immersive virtual environments and robotic simulation.",
-  description: "DEMETRA is an advanced research platform focused on the digitization of pruning techniques. By combining high-fidelity physics simulations with immersive virtual reality, the project provides a safe and optimized environment for training agricultural workers and testing robotic pruning algorithms.",
+  description: "DEMETRA is an innovative research platform dedicated to the digitization of pruning techniques and the advancement of agricultural training. At its core, the project leverages a human-in-the-loop approach, placing the operator inside a highly immersive virtual environment. By seamlessly integrating advanced technologies, such as omnidirectional locomotion systems and authentic haptic interfaces, DEMETRA allows users to move freely and physically interact with digital plants exactly as they would in a real orchard. Beyond offering an unprecedented, safe, and optimized environment for upskilling agricultural workers, the platform serves a dual purpose. By combining high-fidelity physics simulations with precise digital twins, DEMETRA provides a robust, risk-free testing ground for validating and refining automated robotic pruning algorithms, shaping the future of smart agriculture.",
   publications: [
-    { title: "Virtual Reality for Agricultural Training: The DEMETRA Platform", url: "#" },
-    { title: "Real-time Simulation of Pruning Dynamics in Virtual Environments", url: "#" },
-    { title: "Robotic Pruning: A Survey of Simulation-to-Real Transfer", url: "#" }
+    { title: "An Immersive Hazelnut Tree Pruning Simulator for Agricultural Operator Training", url: "https://doi.org/10.1109/MetroXRAINE66377.2025.11340139" },
+    { title: "Design of an Environment for Virtual Training Based on Digital Reconstruction: From Real Vegetation to Its Tactile Simulation", url: "https://doi.org/10.3390/designs9020032" }
   ],
-  team: [
-    { name: "Marco Carnevale", role: "Principal Investigator" },
-    { name: "RAMS Lab Team", role: "Researchers & Developers" },
-    { name: "University of Pavia", role: "Institutional Partner" }
-  ],
-  consortium: [
-    "University of Pavia",
-    "RAMS Lab",
-    "DIII — Department of Industrial and Information Engineering"
-  ]
+  funding: "Produced within the NODES project, financed by the MUR on M4C2 funds - Investment 1.5 'Innovation Ecosystems', within the PNRR financed by the European Union - NextGenerationEU (Grant agreement Cod. n.ECS00000036)."
 };
 ---
 
@@ -30,16 +20,27 @@ const project = {
     <!-- FIXED LOGO OVERLAY -->
     <div class="fixed-ui">
       <div class="brand-logos">
-        <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
+          <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+        </a>
         <div class="logo-separator"></div>
-        <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        <a href={withBase('/')}>
+          <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
+        </a>
       </div>
     </div>
 
     <!-- SECTION 1: HERO -->
     <section class="section hero-section">
       <div class="bg-media">
-        <img src={withBase('/images/projects/demetra-hero-bg.png')} alt="Hero Background" class="parallax-bg" />
+        <video 
+          src={withBase('/videos/projects/0505(1).mp4')} 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="hero-bg-video"
+        ></video>
         <div class="bg-overlay"></div>
       </div>
       <div class="content">
@@ -48,19 +49,39 @@ const project = {
       </div>
     </section>
 
-    <!-- SECTION 2: VISION -->
-    <section class="section vision-section">
-      <div class="bg-media vision-bg">
-        <img src={withBase('/images/projects/demetra-vision-bg.png')} alt="Vision Background" />
+    <!-- SECTION 2: UNLIMITED LOCOMOTION -->
+    <section class="section content-section locomotion-bg">
+      <div class="bg-media">
+        <video 
+          src={withBase('/videos/projects/0505(3).mp4')} 
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          class="hero-bg-video"
+        ></video>
+        <div class="bg-overlay"></div>
       </div>
-      <div class="content">
-        <blockquote class="vision-quote">
-          {project.vision}
-        </blockquote>
+      <div class="content-grid container">
+        <div class="text-block reveal">
+          <h2 class="section-label">Unlimited Locomotion</h2>
+          <p>Walk naturally through the virtual rows as if you were in the field. Explore the entire environment and select any tree with total freedom of movement.</div>
+        <div class="visual-block reveal">
+          <div class="tech-video-container side-sync-video">
+            <video 
+              src={withBase('/videos/projects/0505(4).mp4')} 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              class="tech-video"
+            ></video>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SECTION 3: MODULAR CONTENT - THE SYSTEM -->
+    <!-- SECTION 3: DIGITAL TWIN -->
     <section class="section content-section nature-bg">
       <div class="bg-media">
         <img src={withBase('/images/projects/demetra-nature-texture.png')} alt="Nature Texture" class="parallax-bg" />
@@ -68,43 +89,30 @@ const project = {
       <div class="content-grid container">
         <div class="text-block reveal">
           <h2 class="section-label">Digital Twin</h2>
-          <p>The system creates a perfect digital replica of agricultural environments, allowing for the precise modeling of tree morphology and pruning responses.</p>
-        </div>
+          <p>From high-resolution photogrammetry to high-fidelity virtual models. Real trees are reconstructed with absolute precision, allowing for realistic pruning simulations.</div>
         <div class="visual-block reveal">
-          <div class="tech-video-container">
-            <video 
-              src={withBase('/videos/projects/demetra-digital-twin.mp4')} 
-              autoplay 
-              loop 
-              muted 
-              playsinline 
-              class="tech-video"
-            >
-              <div class="video-placeholder">Digital Twin Animation</div>
-            </video>
-          </div>
+          <div id="tree-canvas-container" class="tree-3d-container" data-model={withBase('/models/tree_old.glb')}></div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 4: MODULAR CONTENT - TRAINING -->
+    <!-- SECTION 4: TRAINING -->
     <section class="section content-section alternate">
+    <div class="bg-media">
+        <img src={withBase('/images/projects/demetra-nature-texture.png')} alt="Nature Texture" class="parallax-bg" />
+      </div>
       <div class="content-grid container">
         <div class="visual-block reveal">
-          <div class="abstract-viz">
-            <div class="viz-line"></div>
-            <div class="viz-line delay-1"></div>
-            <div class="viz-line delay-2"></div>
-          </div>
+          <div id="shear-canvas-container" class="shear-3d-container" data-model={withBase('/models/shear.glb')}></div>
         </div>
         <div class="text-block reveal">
-          <h2 class="section-label">Skill Acquisition</h2>
-          <p>Real-time haptic feedback and visual analytics guide the user through complex pruning decisions, accelerating the learning curve for sustainable practices.</p>
+          <h2 class="section-label">Real-Tool Integration</h2>
+          <p>Erase the boundary between simulation and practice by using real pruning tools. Experience one-to-one haptic feedback in a real-time, accelerating skill acquisition through a natural and familiar tactile experience.</p>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 5: RECAP (Redesigned as Information Box) -->
+    <!-- SECTION 5: RECAP -->
     <section class="recap-section">
       <div class="container">
         <div class="info-box">
@@ -119,30 +127,14 @@ const project = {
                 <h3 class="info-label">Publications</h3>
                 <ul class="info-list">
                   {project.publications.map(pub => (
-                    <li><a href={pub.url}>{pub.title}</a></li>
+                    <li><a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a></li>
                   ))}
                 </ul>
               </div>
 
               <div class="info-group">
-                <h3 class="info-label">Team</h3>
-                <ul class="info-list">
-                  {project.team.map(member => (
-                    <li>
-                      <span class="member-name">{member.name}</span>
-                      <span class="member-role">{member.role}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div class="info-group">
-                <h3 class="info-label">Consortium</h3>
-                <ul class="info-list">
-                  {project.consortium.map(entity => (
-                    <li>{entity}</li>
-                  ))}
-                </ul>
+                <h3 class="info-label">Funding</h3>
+                <p class="funding-text">{project.funding}</p>
               </div>
             </div>
           </div>
@@ -168,7 +160,6 @@ const project = {
     background-color: var(--color-bg-dark);
     color: white;
     font-family: var(--font-tech);
-    overflow-x: hidden;
   }
 
   /* FIXED UI */
@@ -187,20 +178,9 @@ const project = {
     mix-blend-mode: exclusion;
   }
 
-  .logo-unipv {
-    height: 60px; /* Increased from 40px */
-    filter: brightness(0) invert(1);
-  }
-
-  .logo-ramslab {
-    height: 45px; /* Increased from 30px */
-  }
-
-  .logo-separator {
-    width: 1px;
-    height: 45px; /* Increased from 30px */
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+  .logo-unipv { height: 60px; filter: brightness(0) invert(1); }
+  .logo-ramslab { height: 45px; }
+  .logo-separator { width: 1px; height: 45px; background-color: rgba(255, 255, 255, 0.4); }
 
   /* SECTION BASE */
   .section {
@@ -222,12 +202,7 @@ const project = {
     z-index: 0;
   }
 
-  .bg-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.4;
-  }
+  .bg-media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
 
   .bg-overlay {
     position: absolute;
@@ -235,237 +210,69 @@ const project = {
     background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.8));
   }
 
-  .content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    max-width: 800px;
-    padding: 2rem;
-  }
+  .content { position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 2rem; }
 
   /* HERO */
-  .title-main {
-    font-size: clamp(4rem, 15vw, 10rem);
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    margin: 0;
-    line-height: 0.9;
-    text-transform: uppercase;
-    color: var(--color-green-primary);
-  }
+  .title-main { font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; letter-spacing: -0.05em; margin: 0; line-height: 0.9; text-transform: uppercase; color: var(--color-green-primary); }
+  .subtitle { font-size: 1.25rem; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 1rem; opacity: 0.7; }
 
-  .subtitle {
-    font-size: 1.25rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-top: 1rem;
-    opacity: 0.7;
-  }
-
-  /* VISION */
-  .vision-section {
-    background-color: #050505;
-  }
-
-  .vision-quote {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-    max-width: 1000px;
-    color: white;
-    text-align: left;
-    margin: 0;
-  }
+  /* LOCOMOTION SECTION */
+  .locomotion-bg { background-color: #050505; }
+  .hero-bg-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; opacity: 0.4; display: block; z-index: 0; }
 
   /* CONTENT SECTIONS */
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    width: 100%;
-    padding: 0 4rem;
-  }
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; padding: 0 4rem; }
+  .visual-block { display: flex; justify-content: center; align-items: center; width: 100%; }
+  .alternate .content-grid { grid-template-columns: 1.2fr 0.8fr; }
+  .section-label { color: var(--color-green-primary); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.875rem; margin-bottom: 1rem; }
+  .text-block p { font-size: 1.5rem; line-height: 1.4; opacity: 0.9; max-width: 450px; }
 
-  .alternate .content-grid {
-    grid-template-columns: 1.2fr 0.8fr;
-  }
-
-  .section-label {
-    color: var(--color-green-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-  }
-
-  .text-block p {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    opacity: 0.9;
-    max-width: 450px;
-  }
-
-  /* RECAP SECTION - INFORMATION BOX */
-  .recap-section {
-    padding: 120px 0;
-    background-color: white;
-    color: black;
-  }
-
-  .info-box {
-    background-color: #f0fdf4; /* Light green background */
-    border-radius: 4px;
-    padding: 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 80px;
-  }
-
-  .info-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 24px;
-    color: #666;
-    font-weight: 700;
-  }
-
-  .info-description {
-    font-size: 1.75rem;
-    line-height: 1.3;
-    font-weight: 400;
-    color: #111;
-  }
-
-  .info-group {
-    margin-bottom: 48px;
-  }
-
-  .info-group:last-child {
-    margin-bottom: 0;
-  }
-
-  .info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .info-list li {
-    padding: 16px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    font-size: 1.1rem;
-    line-height: 1.4;
-  }
-
-  .info-list li:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-
-  .info-list a {
-    color: black;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-
-  .info-list a:hover {
-    opacity: 0.6;
-  }
-
-  .member-name {
-    display: block;
-    font-weight: 600;
-  }
-
-  .member-role {
-    font-size: 0.85rem;
-    color: #666;
-  }
-
-  .info-footer {
-    margin-top: 60px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    text-align: left;
-  }
-
-  .back-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-  }
-
-  .back-link:hover {
-    color: black;
-  }
+  /* RECAP SECTION */
+  .recap-section { padding: 120px 0; background-color: white; color: black; }
+  .info-box { background-color: #f0fdf4; border-radius: 4px; padding: 60px; max-width: 1100px; margin: 0 auto; }
+  .info-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; }
+  .info-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 24px; color: #666; font-weight: 700; }
+  .info-description { font-size: 1.75rem; line-height: 1.3; font-weight: 400; color: #111; }
+  .info-group { margin-bottom: 48px; }
+  .info-list { list-style: none; padding: 0; margin: 0; }
+  .info-list li { padding: 16px 0; border-top: 1px solid rgba(0, 0, 0, 0.08); font-size: 1.1rem; }
+  .info-list a { color: black; text-decoration: none; }
+  .funding-text { font-size: 1rem; line-height: 1.5; color: #333; }
+  .info-footer { margin-top: 60px; padding-top: 32px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
+  .back-link { color: #666; text-decoration: none; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
   /* ANIMATIONS */
-  .parallax-bg {
-    transition: transform 0.1s ease-out;
-  }
+  .parallax-bg { transition: transform 0.1s ease-out; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  .tree-3d-container {
+    position: relative;
+    width: 860px;
+    height: 1050px;
+    margin: 0 auto;
+    z-index: 1;
+    cursor: grab;
   }
+  .tree-3d-container:active { cursor: grabbing; }
 
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .tech-video-container {
+  .shear-3d-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border: 1px solid var(--color-green-dark);
-    overflow: hidden;
+    height: 600px;
+    z-index: 1;
   }
 
-  .tech-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .tech-video { width: 100%; height: 100%; object-fit: cover; }
+  .side-sync-video {
+    aspect-ratio: 9 / 16 !important;
+    width: 280px !important;
+    border: 2px solid var(--color-green-primary) !important;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
   }
 
-  .video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-green-primary);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    background: linear-gradient(45deg, #050505, #111);
-  }
-
-  .abstract-viz {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .viz-line {
-    height: 2px;
-    background: var(--color-green-primary);
-    width: 100%;
-    animation: pulse 4s infinite;
-  }
-
+  .abstract-viz { display: flex; flex-direction: column; gap: 10px; }
+  .viz-line { height: 2px; background: var(--color-green-primary); width: 100%; animation: pulse 4s infinite; }
   .delay-1 { animation-delay: 1s; }
   .delay-2 { animation-delay: 2s; }
 
@@ -474,47 +281,337 @@ const project = {
     50% { opacity: 1; transform: scaleX(1); }
   }
 
-  /* RESPONSIVE */
   @media (max-width: 768px) {
-    .content-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 0 2rem;
-    }
-    .info-box { padding: 30px; }
-    .info-grid { grid-template-columns: 1fr; gap: 40px; }
-    .info-description { font-size: 1.4rem; }
-    .fixed-ui { top: 1rem; left: 1rem; }
-    .brand-logos { gap: 1rem; }
-    .logo-unipv { height: 40px; }
-    .logo-ramslab { height: 30px; }
+    .side-sync-video { width: 240px !important; }
+    .content-grid { grid-template-columns: 1fr; padding: 0 2rem; }
+    .tree-3d-container { width: 100%; height: 600px; }
   }
 </style>
 
 <script>
-  // Simple scrollytelling logic
-  const sections = document.querySelectorAll('.section');
-  const parallaxBgs = document.querySelectorAll('.parallax-bg');
+  // 1. REVEAL LOGIC (IMMEDIATE)
+  function initReveal() {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  // Reveal elements on scroll
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     
-    // Parallax effect
-    parallaxBgs.forEach(bg => {
-      const speed = 0.2;
-      const offset = scrollY * speed;
-      (bg as HTMLElement).style.transform = `translateY(${offset}px)`;
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.parallax-bg').forEach(bg => {
+        const speed = 0.2;
+        (bg as HTMLElement).style.transform = `translateY(${scrollY * speed}px)`;
+      });
     });
-  });
+  }
+
+  // 2. THREE.JS LOGIC (PROTECTED)
+  async function initThree() {
+    const container = document.getElementById('tree-canvas-container');
+    if (!container) return;
+
+    try {
+      const THREE = await import('three');
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
+      const { default: gsap } = await import('gsap');
+
+      class TreeAnimation {
+        private scene = new THREE.Scene();
+        private camera = new THREE.PerspectiveCamera(45, container!.clientWidth / container!.clientHeight, 0.1, 2000);
+        private renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        private controls = new OrbitControls(this.camera, this.renderer.domElement);
+        private modelGroup = new THREE.Group();
+        private pointsGroup = new THREE.Group();
+        private wireframeGroup = new THREE.Group();
+        private finalGroup = new THREE.Group();
+        private timeline: gsap.core.Timeline | null = null;
+        private isAnimating = false;
+        private modelLoaded = false;
+
+        constructor(private modelPath: string) {
+          this.init();
+        }
+
+        private init() {
+          this.renderer.setSize(container!.clientWidth, container!.clientHeight);
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          container!.appendChild(this.renderer.domElement);
+
+          this.camera.position.set(0, -1, 10);
+          this.scene.add(this.modelGroup);
+          this.modelGroup.add(this.pointsGroup, this.wireframeGroup, this.finalGroup);
+
+          this.controls.enableDamping = true;
+          this.controls.dampingFactor = 0.05;
+          this.controls.enablePan = false;
+          this.controls.minPolarAngle = Math.PI / 2.2; 
+          this.controls.maxPolarAngle = Math.PI / 1.8;
+          this.controls.enabled = false;
+
+          const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+          this.scene.add(ambientLight);
+          const pointLight = new THREE.PointLight(0xffffff, 2.0);
+          pointLight.position.set(10, 20, 10);
+          this.scene.add(pointLight);
+
+          this.setupEventListeners();
+          this.animate();
+        }
+
+        private loadModel() {
+          const loader = new GLTFLoader();
+          loader.load(this.modelPath, (gltf) => {
+            const model = gltf.scene;
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            model.traverse((child) => {
+              if ((child as THREE.Mesh).isMesh) {
+                const mesh = child as THREE.Mesh;
+                mesh.updateMatrixWorld();
+                const geometry = mesh.geometry.clone();
+                geometry.applyMatrix4(mesh.matrixWorld);
+
+                const pMat = new THREE.PointsMaterial({ color: 0x10b981, size: 0.015, transparent: true, opacity: 0 });
+                this.pointsGroup.add(new THREE.Points(geometry, pMat));
+
+                const wMat = new THREE.MeshBasicMaterial({ color: 0x10b981, wireframe: true, transparent: true, opacity: 0 });
+                this.wireframeGroup.add(new THREE.Mesh(geometry, wMat));
+
+                const final = mesh.clone();
+                final.geometry = geometry;
+                final.position.set(0, 0, 0);
+                final.rotation.set(0, 0, 0);
+                final.scale.set(1, 1, 1);
+                if (Array.isArray(final.material)) {
+                  final.material = final.material.map(m => {
+                    const newM = m.clone();
+                    newM.transparent = true;
+                    newM.opacity = 0;
+                    return newM;
+                  });
+                } else {
+                  final.material = final.material.clone();
+                  final.material.transparent = true;
+                  final.material.opacity = 0;
+                }
+                this.finalGroup.add(final);
+              }
+            });
+
+            this.modelGroup.position.sub(center);
+            const scaleFactor = 15 / Math.max(size.x, size.y, size.z);
+            this.modelGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+            this.modelGroup.position.y -= (size.y * scaleFactor) * 0.4;
+
+            this.setupTimeline();
+            if (this.isAnimating) this.timeline?.play();
+          });
+        }
+
+        private setupTimeline() {
+          this.timeline = gsap.timeline({ paused: true, onComplete: () => { this.controls.enabled = true; } });
+          const pMats: any[] = []; this.pointsGroup.traverse(c => { if((c as any).isPoints) pMats.push((c as any).material); });
+          const wMats: any[] = []; this.wireframeGroup.traverse(c => { if((c as any).isMesh) wMats.push((c as any).material); });
+          const fMats: any[] = []; this.finalGroup.traverse(c => { if((c as any).isMesh) {
+            if(Array.isArray((c as any).material)) fMats.push(...(c as any).material);
+            else fMats.push((c as any).material);
+          }});
+
+          this.timeline.to(this.camera.position, { z: 24, duration: 8, ease: "power1.inOut" }, 0);
+          this.timeline.to(pMats, { opacity: 1, duration: 2.5, stagger: 0.1 }, 0);
+          this.timeline.to(wMats, { opacity: 0.3, duration: 2.5, stagger: 0.1 }, 1.5);
+          this.timeline.to(fMats, { opacity: 1, duration: 4, stagger: 0.15 }, 3.5);
+          this.timeline.to([...pMats, ...wMats], { opacity: 0.1, duration: 3 }, 5);
+        }
+
+        private setupEventListeners() {
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                this.isAnimating = true;
+                if (!this.modelLoaded) { this.modelLoaded = true; this.loadModel(); }
+                this.timeline?.play();
+              } else {
+                this.isAnimating = false;
+              }
+            });
+          }, { threshold: 0.1 });
+          obs.observe(container!);
+        }
+
+        private animate() {
+          requestAnimationFrame(() => this.animate());
+          if (!this.isAnimating) return;
+          this.controls.update();
+          if (!this.controls.enabled) this.modelGroup.rotation.y += 0.0008;
+          this.renderer.render(this.scene, this.camera);
+        }
+      }
+
+      const modelPath = container.getAttribute('data-model') || '';
+      if (modelPath) new TreeAnimation(modelPath);
+
+      // Shear Animation Setup
+      const shearContainer = document.getElementById('shear-canvas-container');
+      if (shearContainer) {
+        const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+        
+        class ShearAnimation {
+          private scene = new THREE.Scene();
+          private camera: THREE.PerspectiveCamera;
+          private renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+          private modelGroup = new THREE.Group();
+          private isAnimating = false;
+          private modelLoaded = false;
+          
+          private bladeMesh: THREE.Object3D | null = null;
+          private triggerMesh: THREE.Object3D | null = null;
+          
+          private targetClose = 0;
+          private currentClose = 0;
+
+          constructor(private container: HTMLElement, private modelPath: string) {
+            this.camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            this.init();
+          }
+
+          private init() {
+            this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.container.appendChild(this.renderer.domElement);
+
+            this.camera.position.set(0, 0, 5);
+            this.scene.add(this.modelGroup);
+
+            // Lighting for realistic metallic material
+            const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+            this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            this.scene.add(ambientLight);
+            
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            dirLight.position.set(2, 5, 5);
+            this.scene.add(dirLight);
+
+            this.setupEventListeners();
+            this.animate();
+          }
+
+          private loadModel() {
+            const loader = new GLTFLoader();
+            loader.load(this.modelPath, (gltf) => {
+              const model = gltf.scene;
+              
+              model.traverse((child) => {
+                const name = child.name.toLowerCase();
+                
+                // Grab the first object (usually parent group) that matches the name
+                if (name.includes('blade') && !this.bladeMesh) this.bladeMesh = child;
+                if (name.includes('trigger') && !this.triggerMesh) this.triggerMesh = child;
+                
+                if ((child as THREE.Mesh).isMesh) {
+                  const mesh = child as THREE.Mesh;
+                  // Ensure shiny metal material
+                  if (mesh.material instanceof THREE.MeshStandardMaterial) {
+                    mesh.material.metalness = 0.9;
+                    mesh.material.roughness = 0.2;
+                    mesh.material.envMapIntensity = 1.0;
+                    mesh.material.needsUpdate = true;
+                  }
+                }
+              });
+
+              // Calculate bounding box and center
+              const box = new THREE.Box3().setFromObject(model);
+              const center = box.getCenter(new THREE.Vector3());
+              const size = box.getSize(new THREE.Vector3());
+              
+              this.modelGroup.add(model);
+              model.position.sub(center);
+              
+              // Scale to fit the container
+              const maxDim = Math.max(size.x, size.y, size.z);
+              const scaleFactor = 4.5 / maxDim;
+              this.modelGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+              // Present at an angle
+              this.modelGroup.rotation.y = Math.PI / 4;
+              this.modelGroup.rotation.x = Math.PI / 12;
+            });
+          }
+
+          private setupEventListeners() {
+            const obs = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  this.isAnimating = true;
+                  if (!this.modelLoaded) { 
+                    this.modelLoaded = true; 
+                    this.loadModel(); 
+                  }
+                } else {
+                  this.isAnimating = false;
+                }
+              });
+            }, { threshold: 0.1 });
+            obs.observe(this.container);
+            this.container.addEventListener('wheel', (e) => {
+              e.preventDefault();
+              const sensitivity = 0.0015;
+              this.targetClose += e.deltaY * sensitivity;
+              this.targetClose = Math.max(0, Math.min(1, this.targetClose));
+            }, { passive: false });
+            
+            window.addEventListener('resize', () => {
+              if (!this.container) return;
+              this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+              this.camera.updateProjectionMatrix();
+              this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            });
+          }
+
+          private animate() {
+            requestAnimationFrame(() => this.animate());
+            if (!this.isAnimating) return;
+
+            // Interpolate for smooth closing
+            this.currentClose += (this.targetClose - this.currentClose) * 0.1;
+
+            if (this.bladeMesh) {
+              // Blade rotation (almost double)
+              this.bladeMesh.rotation.z = -this.currentClose * (Math.PI / 3.5);
+            }
+            if (this.triggerMesh) {
+              // Trigger rotation (half of blade)
+              this.triggerMesh.rotation.z = -this.currentClose * (Math.PI / 7);
+            }
+
+            // Gentle idle rotation
+            this.modelGroup.rotation.y += 0.002;
+
+            this.renderer.render(this.scene, this.camera);
+          }
+        }
+
+        const shearModelPath = shearContainer.getAttribute('data-model') || '';
+        if (shearModelPath) new ShearAnimation(shearContainer, shearModelPath);
+      }
+
+    } catch (e) {
+      console.error("Three.js failed to load:", e);
+    }
+  }
+
+  // Execution
+  initReveal();
+  initThree();
 </script>
