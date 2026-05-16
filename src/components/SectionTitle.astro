@@ -8,6 +8,6 @@ const { title, note } = Astro.props;
 ---
 
 <div class="section-heading">
-  <div class="section-title">{title}</div>
-  {note && <div class="section-note">{note}</div>}
+  <div class="text-heading-2">{title}</div>
+  {note && <div class="text-list-meta" style="color: var(--muted);">{note}</div>}
 </div>

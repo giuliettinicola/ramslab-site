@@ -22,9 +22,9 @@ import { withBase } from '../lib/assets';
     </div>
   )}
   <div class="media-caption">
-    <div class="media-title">
+    <div class="text-list-title">
       {href ? <a href={href}>{title}</a> : title}
     </div>
-    {meta && <div class="media-meta">{meta}</div>}
+    {meta && <div class="text-list-meta" style="color: var(--muted);">{meta}</div>}
   </div>
 </article>

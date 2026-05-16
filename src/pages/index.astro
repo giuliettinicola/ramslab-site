@@ -2,12 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SectionTitle from '../components/SectionTitle.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { withBase } from '../lib/assets';
 import { entrySlug } from '../lib/entries';
-import { formatDate } from '../lib/format';
 import site from '../content/settings/site.json';
 
 const projects = (await getCollection('projects')).sort((a, b) => {
@@ -23,33 +21,38 @@ const otherPeople = allPeople.slice(5).sort((a, b) => {
   return surnameA.localeCompare(surnameB);
 });
 const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year).slice(0, 4);
-
-const introColumns = [
-  'Welcome to RAMS lab! Our aim is to bring innovation and creativity to industrial and research applications using cutting-edge robotics and dynamic simulators. Our team of researchers is dedicated to advancing the field of robotics and simulators in order to revolutionize the way industries operate. We are constantly exploring new ways to apply this technology to enhance productivity, improve safety, and reduce costs.',
-  'One of our main focuses is on developing simulators for sports and driving. Our state-of-the-art simulators are designed to provide athletes and drivers with a realistic training experience, allowing them to improve their skills and performance in a safe and controlled environment. These simulators are also a valuable tool for medical researches, as they can be used to analyze and optimize performances of people who need rehabilitation in a controlled environment.',
-  'In addition to our work in simulators, we also specialize in robotics for industrial applications. Our team is constantly developing new robotic applications that can be used in a wide range of industries, from manufacturing and logistics to healthcare and agriculture. Our goal is to make these systems more efficient, reliable, and cost-effective, so that they can be widely adopted and make a significant impact on the industries they serve.'
-];
 ---
 
 <BaseLayout title={site.siteTitle}>
   <Header />
-  <main>
+  <main style="padding-bottom: 60px;">
+
+    <!-- ─── Laboratory Section ─── -->
     <section class="home-intro">
-      <div class="container home-intro-grid">
+      <div class="home-intro-grid">
         <div class="home-intro-label">
-          <div class="label">Laboratory</div>
-          <div class="caption">{site.siteMotto ?? site.siteDescription}</div>
+          <div class="text-heading-2">Laboratory</div>
+          <div class="text-link-header" style="color: var(--muted);">Imagine, Build, Automate: pioneering the next era of industrial robotics and simulation</div>
         </div>
-        {introColumns.map((paragraph) => (
-          <div class="home-intro-copy">
-            <p>{paragraph}</p>
-          </div>
-        ))}
+        <div class="text-body" style="color: var(--text-soft);">
+          <p>Welcome to RAMS lab! Our aim is to bring innovation and creativity to industrial and research applications using cutting-edge robotics and dynamic simulators.</p>
+          <p>Our team of researchers is dedicated to advancing the field of robotics and simulators in order to revolutionize the way industries operate. We are constantly exploring new ways to apply this technology to enhance productivity, improve safety, and reduce costs.</p>
+        </div>
+        <div class="text-body" style="color: var(--text-soft);">
+          <p>One of our main focuses is on developing simulators for sports and driving. Our state-of-the-art simulators are designed to provide athletes and drivers with a realistic training experience, allowing them to improve their skills and performance in a safe and controlled environment. These simulators are also valuable tools for medical researchers, as they can be used to analyse and optimise the performance of people undergoing rehabilitation.</p>
+        </div>
+        <div class="text-body" style="color: var(--text-soft);">
+          <p>In addition to our work in simulators, we also specialize in robotics for industrial applications. Our team is constantly developing new robotic applications that can be used in a wide range of industries, from manufacturing and logistics to healthcare and agriculture. Our goal is to make these systems more efficient, reliable, and cost- effective, so that they can be widely adopted and make a significant impact on the industries they serve.</p>
+        </div>
       </div>
     </section>
 
-    <section class="container">
-      <SectionTitle title="Projects" note="Selected entries from the current placeholder archive. Scroll horizontally to browse the strip." />
+    <!-- ─── Projects Section ─── -->
+    <section class="home-projects">
+      <div class="section-heading">
+        <div class="text-heading-2" style="width: 72px;">Projects</div>
+        <div class="text-link-header" style="color: var(--muted);">Project selection</div>
+      </div>
       <div class="media-strip">
         {featuredProjects.map((project) => (
           <ProjectCard
@@ -67,64 +70,76 @@ const introColumns = [
       </div>
     </section>
 
-    <section class="container home-columns">
+    <!-- ─── Bottom 3 Columns ─── -->
+    <section class="home-columns">
+
+      <!-- Publications Column -->
       <div class="home-column">
-        <h2 class="home-column-title">Publications</h2>
+        <div class="home-column-heading">
+          <h2 class="text-heading-2">Publications</h2>
+        </div>
         <div class="dense-list">
           {publications.map((publication) => (
             <article class="dense-item">
-              <div class="dense-title">{publication.data.title}</div>
-              <div class="dense-meta">{publication.data.authors.join(', ')}</div>
-              {publication.data.venue && <div class="dense-text"><em>{publication.data.venue}</em></div>}
+              <div class="text-list-title" style="color: var(--text);">{publication.data.title}</div>
+              <div class="text-list-meta" style="color: var(--muted);">{publication.data.authors.join(', ')}</div>
+              {publication.data.venue && <div class="text-emphasis" style="color: var(--muted);">{publication.data.venue}</div>}
             </article>
           ))}
           <div class="home-column-footer">
-            <a href={withBase('/publications/')} class="browse-link">browse all publications</a>
+            <a href={withBase('/publications/')} class="text-heading-2" style="text-decoration: underline; text-underline-offset: 0.2em;">browse all publications</a>
+            <span style="font-size: 14px;">➞</span>
           </div>
         </div>
       </div>
 
+      <!-- People Column -->
       <div class="home-column">
-        <h2 class="home-column-title">People</h2>
+        <div class="home-column-heading">
+          <h2 class="text-heading-2">People</h2>
+        </div>
         <div class="dense-list">
           {people.map((person) => (
             <article class="dense-item">
-              <div class="dense-title"><a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a></div>
-              <div class="dense-meta">{person.data.role}</div>
+              <div class="text-list-title"><a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a></div>
+              <div class="text-list-meta" style="color: var(--muted);">{person.data.role}</div>
             </article>
           ))}
         </div>
         {otherPeople.length > 0 && (
-          <div class="home-column-footer" style="margin-top: 8px;">
-            {otherPeople.map((person, index) => {
-              return (
-                <Fragment>
-                  <a href={withBase(`/people/${entrySlug(person.id)}/`)} style="font-size: 0.82rem; font-weight: 400; color: var(--text); text-decoration: none;">{person.data.name}</a>{index < otherPeople.length - 1 ? ', ' : ''}
-                </Fragment>
-              );
-            })}
+          <div class="home-column-phd">
+            {otherPeople.map((person, index) => (
+              <Fragment>
+                <a href={withBase(`/people/${entrySlug(person.id)}/`)} class="text-link-header" style="color: var(--text);">{person.data.name}</a>{index < otherPeople.length - 1 ? <span class="text-link-header" style="color: var(--text);">, </span> : ''}
+              </Fragment>
+            ))}
           </div>
         )}
       </div>
 
+      <!-- About Column -->
       <div class="home-column">
-        <h2 class="home-column-title">About</h2>
+        <div class="home-column-heading">
+          <h2 class="text-heading-2">About</h2>
+        </div>
         <div class="dense-list">
           <article class="dense-item">
-            <div class="dense-title"><a href={withBase('/about/')}>Laboratory profile</a></div>
-            <div class="dense-text">Overview, scope, contact information, and the current structure of the RAMSLAB site.</div>
+            <div class="text-list-title"><a href={withBase('/about/')}>Laboratory profile</a></div>
+            <div class="text-list-meta" style="color: var(--muted);">Overview, scope, contact information, and the current structure of the RAMSLAB site.</div>
           </article>
           <article class="dense-item">
-            <div class="dense-title"><a href={withBase('/projects/')}>Project archive</a></div>
-            <div class="dense-text">Research projects, prototypes, and collaborative investigations.</div>
+            <div class="text-list-title"><a href={withBase('/projects/')}>Project archive</a></div>
+            <div class="text-list-meta" style="color: var(--muted);">Research projects, prototypes, and collaborative investigations.</div>
           </article>
           <article class="dense-item">
-            <div class="dense-title"><a href={withBase('/publications/')}>Publication archive</a></div>
-            <div class="dense-text">Grouped research outputs indexed by year.</div>
+            <div class="text-list-title"><a href={withBase('/publications/')}>Publication archive</a></div>
+            <div class="text-list-meta" style="color: var(--muted);">Grouped research outputs indexed by year.</div>
           </article>
         </div>
       </div>
+
     </section>
+
   </main>
   <Footer />
 </BaseLayout>
