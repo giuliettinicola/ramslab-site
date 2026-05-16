@@ -20,14 +20,15 @@ Use these for Color Styles.
 ## Typography
 Use these for Text Styles.
 
-| Type | Font Family | Size | Weight | Line Height |
-| :--- | :--- | :--- | :--- | :--- |
-| **Page Heading** | Sans-serif | 38px - 80px | 700 | 0.96 |
-| **Section Title** | Sans-serif | 12px (0.75rem) | 700 | 1.0 (Caps) |
-| **Body (Serif)** | Serif | 16px (1rem) | 400 | 1.8 |
-| **Archive Title** | Sans-serif | 18px (1.12rem) | 700 | 1.14 |
-| **Meta / Label** | Sans-serif | 12px (0.75rem) | 700 | 1.0 (Caps) |
-| **Caption** | Sans-serif | 13px (0.82rem) | 400 | 1.5 |
+| Type | Font Family | Size | Weight | Line Height | CSS Variable |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Heading 2** | Sans-serif | 12px | 700 | 17.4px | `--text-heading-2` / `.text-heading-2` |
+| **Nav Link** | Sans-serif | 13.4px | 700 | 19.5px | `--text-nav-link` / `.text-nav-link` |
+| **Body (Serif)** | Serif | 15.7px | 400 | 25px | `--text-body` / `.text-body` |
+| **Body Italic** | Serif | 12.2px | 400 (Italic) | 17.6px | `--text-body-italic` / `.text-body-italic` |
+| **List Title** | Sans-serif | 13.1px | 700 | 17.7px | `--text-list-title` / `.text-list-title` |
+| **List Meta** | Sans-serif | 12.5px | 400 | 18.1px | `--text-list-meta` / `.text-list-meta` |
+| **Emphasis** | Sans-serif | 12.5px | 400 (Italic) | 18.7px | `--text-emphasis` / `.text-emphasis` |
 
 *Note: Sans-serif is "Helvetica Neue" / Arial. Serif is Georgia / Times New Roman.*
 

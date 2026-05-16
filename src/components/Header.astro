@@ -15,22 +15,21 @@ const isActive = (href: string) =>
 ---
 
 <header class="site-header">
-  <div class="container site-header-inner">
+  <div class="site-header-inner">
     <div class="site-brand">
-      <a href={withBase('/')} class="site-brand-link">
-        <img src={withBase('/images/brand/ramslab-icon-black.png')} alt="" width="28" height="28" />
-        <span>
-          <span class="site-title">{site.siteTitle}</span>
-          <span class="site-subtitle">{site.siteDescription}</span>
-        </span>
+      <a href={withBase('/')} class="site-brand-link" aria-label="RAMSLAB">
+        <img src={withBase('/images/brand/ramslab-logo-header.svg')} alt="RAMSLAB Logo" />
       </a>
-      {site.siteMotto && <p class="site-tagline">{site.siteMotto}</p>}
     </div>
     <nav class="site-nav" aria-label="Primary">
       {links.map((link) => (
-        <a href={withBase(link.href)} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
+        <a href={withBase(link.href)} class="text-link-header" style="color: var(--muted);" aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
       ))}
     </nav>
-    <div class="site-indicator">{site.address}</div>
+    <div class="site-indicator">
+      <a href="https://portale.unipv.it/it" aria-label="University of Pavia">
+        <img src={withBase('/images/brand/unipv-logo-header.svg')} alt="University of Pavia" />
+      </a>
+    </div>
   </div>
 </header>
