@@ -130,25 +130,39 @@ import '../styles/global.css';
         window.location.replace('/ramslab-site/');
       }
 
-      const USERS = {
-        user:  'ramslab26!',
-        admin: 'ramslab26!',
+      // SHA-256 hashes only — plaintext password is never stored in source
+      const HASHES = {
+        user:  '7c213bcff9848abe8e03ae4d6a74aab83cdd382342585c94d6b7ce0aac13c5f7',
+        admin: '7c213bcff9848abe8e03ae4d6a74aab83cdd382342585c94d6b7ce0aac13c5f7',
       };
 
-      document.getElementById('login-form').addEventListener('submit', function (e) {
+      async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        return Array.from(new Uint8Array(hashBuffer))
+          .map(b => b.toString(16).padStart(2, '0'))
+          .join('');
+      }
+
+      document.getElementById('login-form').addEventListener('submit', async function (e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim().toLowerCase();
         const password = document.getElementById('password').value;
         const errorEl = document.getElementById('login-error');
 
-        if (USERS[username] && USERS[username] === password) {
-          sessionStorage.setItem('ramslab_role', username);
-          window.location.replace('/ramslab-site/');
-        } else {
-          errorEl.textContent = 'Incorrect username or password.';
-          document.getElementById('password').value = '';
-          document.getElementById('password').focus();
+        const expectedHash = HASHES[username];
+        if (expectedHash) {
+          const inputHash = await sha256(password);
+          if (inputHash === expectedHash) {
+            sessionStorage.setItem('ramslab_role', username);
+            window.location.replace('/ramslab-site/');
+            return;
+          }
         }
+
+        errorEl.textContent = 'Incorrect username or password.';
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
       });
     </script>
   </body>
