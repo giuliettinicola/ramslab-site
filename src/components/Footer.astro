@@ -19,4 +19,15 @@ import { withBase } from '../lib/assets';
       </a>
     </div>
   </div>
+
+  <!-- Mandatory legal links (UniPV Linee guida ecosistema web) -->
+  <div class="site-footer-legal">
+    <a href={withBase('/privacy/')}>Privacy Policy</a>
+    <span class="footer-legal-sep" aria-hidden="true">·</span>
+    <a href={withBase('/privacy/')}>Cookie Policy</a>
+    <span class="footer-legal-sep" aria-hidden="true">·</span>
+    <a href={withBase('/accessibility-statement/')}>Dichiarazione di Accessibilità</a>
+    <span class="footer-legal-sep" aria-hidden="true">·</span>
+    <span>Responsabile Sito Web: <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></span>
+  </div>
 </footer>

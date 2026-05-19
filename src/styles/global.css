@@ -3,7 +3,7 @@
   --text: #111111;
   --text-soft: #2b2b2b;
   --muted: #5f5f5f;
-  --muted-soft: #7d7d7d;
+  --muted-soft: #6b6b6b;
   --line: #d8d8d8;
   --line-soft: #ebebeb;
   --surface: #f2f2f2;
@@ -815,6 +815,52 @@ ol {
   justify-content: flex-end;
 }
 
+.site-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #222222;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #999999;
+}
+
+.site-footer-legal a {
+  color: #cccccc;
+  text-decoration: none;
+}
+
+.site-footer-legal a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.footer-legal-sep {
+  color: #444444;
+}
+
+/* ─── Skip Link (keyboard accessibility) ─── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
 
 .sr-only {
   position: absolute;
@@ -848,6 +894,11 @@ ol {
     flex-wrap: wrap;
     gap: 24px;
     justify-content: center;
+  }
+
+  .site-footer-legal {
+    gap: 4px 6px;
+    font-size: 10px;
   }
 
   .home-intro-grid {

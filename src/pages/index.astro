@@ -25,7 +25,8 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
 
 <BaseLayout title={site.siteTitle}>
   <Header />
-  <main style="padding-bottom: 60px;">
+  <main id="main-content" style="padding-bottom: 60px;">
+    <h1 class="sr-only">RAMSLAB — Research on Advanced Mechanical Systems</h1>
 
     <!-- ─── Laboratory Section ─── -->
     <section class="home-intro">
