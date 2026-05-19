@@ -51,7 +51,6 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
     <section class="home-projects">
       <div class="section-heading">
         <div class="text-heading-2" style="width: 72px;">Projects</div>
-        <div class="text-link-header" style="color: var(--muted);">Project selection</div>
       </div>
       <div class="media-strip">
         {featuredProjects.map((project) => (
@@ -117,7 +116,7 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
         )}
       </div>
 
-      <!-- About Column -->
+      {/* About Column — temporarily hidden, page not ready
       <div class="home-column">
         <div class="home-column-heading">
           <h2 class="text-heading-2">About</h2>
@@ -137,6 +136,7 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
           </article>
         </div>
       </div>
+      */}
 
     </section>
 
