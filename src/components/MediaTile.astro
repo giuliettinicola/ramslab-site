@@ -5,20 +5,21 @@ interface Props {
   meta?: string;
   src?: string;
   alt?: string;
+  fit?: 'cover' | 'contain';
 }
 
-const { href, title, meta, src, alt = title } = Astro.props;
+const { href, title, meta, src, alt = title, fit = 'cover' } = Astro.props;
 import { withBase } from '../lib/assets';
 ---
 
 <article class="media-tile">
   {href ? (
     <a class="media-thumb" href={href}>
-      {src ? <img src={withBase(src)} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
+      {src ? <img src={withBase(src)} alt={alt} loading="lazy" style={`object-fit: ${fit};`} /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
     </a>
   ) : (
     <div class="media-thumb">
-      {src ? <img src={withBase(src)} alt={alt} loading="lazy" /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
+      {src ? <img src={withBase(src)} alt={alt} loading="lazy" style={`object-fit: ${fit};`} /> : <div class="media-thumb-placeholder" aria-hidden="true"></div>}
     </div>
   )}
   <div class="media-caption">
@@ -28,3 +29,4 @@ import { withBase } from '../lib/assets';
     {meta && <div class="text-list-meta" style="color: var(--muted);">{meta}</div>}
   </div>
 </article>
+

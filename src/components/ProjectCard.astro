@@ -6,9 +6,10 @@ interface Props {
   title: string;
   meta?: string;
   src?: string;
+  fit?: 'cover' | 'contain';
 }
 
-const { href, title, meta, src } = Astro.props;
+const { href, title, meta, src, fit } = Astro.props;
 ---
 
-<MediaTile href={href} title={title} meta={meta} src={src} />
+<MediaTile href={href} title={title} meta={meta} src={src} fit={fit} />

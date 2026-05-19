@@ -65,6 +65,7 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
             title={project.data.title}
             meta={[project.data.year?.toString(), project.data.status].filter(Boolean).join(' · ')}
             src={project.data.cover}
+            fit={project.data.coverFit}
           />
         ))}
       </div>

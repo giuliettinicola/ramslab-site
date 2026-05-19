@@ -6,4 +6,5 @@ status: "ongoing"
 tags: ["medical robotics", "rehabilitation", "fit4medrob"]
 featured: true
 cover: "/images/projects/3dof.jpg"
+coverFit: "contain"
 ---

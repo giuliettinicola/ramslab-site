@@ -6,4 +6,5 @@ status: "ongoing"
 tags: ["simulators", "driving", "rehabilitation", "fit4medrob"]
 featured: true
 cover: "/images/projects/drivesim.jpg"
+coverFit: "contain"
 ---

@@ -12,7 +12,8 @@ const projects = defineCollection({ type: 'content', schema: z.object({
   year: z.number().optional(), status: z.enum(['ongoing','completed','featured']).optional(),
   tags: z.array(z.string()).default([]), people: z.array(z.string()).default([]),
   publications: z.array(z.string()).default([]), consortium: z.array(z.string()).default([]),
-  featured: z.boolean().default(false)
+  featured: z.boolean().default(false),
+  coverFit: z.enum(['cover','contain']).default('cover')
 }) });
 
 const publications = defineCollection({ type: 'content', schema: z.object({
