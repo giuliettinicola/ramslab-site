@@ -18,8 +18,6 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
       section="People"
       title="People"
       description="Faculty members and doctoral researchers currently listed in the RAMSLAB roster."
-      countText={`${people.length} people records`}
-      note="ordered manually from collection metadata"
     />
     <section class="archive-section">
       <div class="container">

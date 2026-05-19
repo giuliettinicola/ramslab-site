@@ -45,6 +45,9 @@ const { title = site.siteTitle, description = site.siteDescription } = Astro.pro
           document.addEventListener('DOMContentLoaded', function () {
             var overlay = document.createElement('div');
             overlay.id = 'under-construction-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.setAttribute('aria-labelledby', 'uc-heading');
             overlay.style.cssText = [
               'position:fixed', 'inset:0', 'z-index:9999',
               'background:#ffffff',
@@ -56,6 +59,7 @@ const { title = site.siteTitle, description = site.siteDescription } = Astro.pro
             var logo = document.createElement('img');
             logo.src = '/ramslab-site/images/brand/ramslab-logo-header.svg';
             logo.alt = 'RAMSLAB';
+            logo.setAttribute('aria-hidden', 'true');
             logo.style.cssText = 'height:24px;width:auto;opacity:0.35;';
 
             var text = document.createElement('div');
@@ -63,7 +67,8 @@ const { title = site.siteTitle, description = site.siteDescription } = Astro.pro
               'text-align:center', 'display:flex', 'flex-direction:column', 'gap:12px'
             ].join(';');
 
-            var heading = document.createElement('p');
+            var heading = document.createElement('h2');
+            heading.id = 'uc-heading';
             heading.textContent = 'Under Construction';
             heading.style.cssText = [
               'margin:0', 'font-size:11px', 'font-weight:700',

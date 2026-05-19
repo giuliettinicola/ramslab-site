@@ -147,8 +147,10 @@ import '../styles/global.css';
       document.getElementById('login-form').addEventListener('submit', async function (e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim().toLowerCase();
-        const password = document.getElementById('password').value;
+        const passwordInput = document.getElementById('password');
+        const password = passwordInput.value;
         const errorEl = document.getElementById('login-error');
+        errorEl.setAttribute('tabindex', '-1');
 
         const expectedHash = HASHES[username];
         if (expectedHash) {
@@ -160,9 +162,16 @@ import '../styles/global.css';
           }
         }
 
+        passwordInput.setAttribute('aria-invalid', 'true');
         errorEl.textContent = 'Incorrect username or password.';
-        document.getElementById('password').value = '';
-        document.getElementById('password').focus();
+        passwordInput.value = '';
+        errorEl.focus({ preventScroll: true }); // Give focus to the live region so it's read immediately
+      });
+
+      // Clear aria-invalid on input
+      document.getElementById('password').addEventListener('input', function() {
+        this.removeAttribute('aria-invalid');
+        document.getElementById('login-error').textContent = '';
       });
     </script>
   </body>
