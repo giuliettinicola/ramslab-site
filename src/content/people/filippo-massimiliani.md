@@ -1,18 +1,16 @@
 ---
 name: "Filippo Massimiliani"
 role: "PhD Candidate"
-shortBio: "PhD candidate."
-areas: ["virtual simulation"]
+shortBio: "PhD candidate specializing in human-in-the-loop sports simulation."
+areas: ["sports simulation", "human-in-the-loop"]
 order: 9
 links:
   - label: "LinkedIn"
     url: "#"
   - label: "PhD Students"
     url: "https://phdieie.unipv.it/phd-students/"
-  - label: "IEIE Minutes 2023"
-    url: "https://phdieie.unipv.it/wp-content/uploads/2023/11/Verbale_IEIE_10_10_2023.pdf"
 ---
 
-Filippo Massimiliani is listed among the IEIE PhD students in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
+Filippo Massimiliani is a PhD student in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
 
-The doctoral minutes for the XXXIX cycle associate his fellowship topic with industrial human-robot collaboration through virtual simulation. His profile therefore fits RAMSLAB work on collaborative robotics, digital environments, and simulation-driven industrial processes.
+His research focuses on human-in-the-loop sports simulation. In particular, he works on the simulation of winter sports such as skeleton and bobsleigh, as well as the development of advanced bicycle simulators. His profile fits perfectly with RAMSLAB's work on dynamic simulators and performance analysis in sports.

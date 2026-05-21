@@ -1,18 +1,16 @@
 ---
 name: "Michele Bedodi"
 role: "PhD Candidate"
-shortBio: "PhD candidate."
-areas: ["virtual simulation"]
+shortBio: "PhD candidate specializing in artificial vision for pharmaceutical robotics."
+areas: ["artificial vision", "pharmaceutical applications"]
 order: 9
 links:
   - label: "LinkedIn"
     url: "#"
   - label: "PhD Students"
     url: "https://phdieie.unipv.it/phd-students/"
-  - label: "IEIE Minutes 2023"
-    url: "https://phdieie.unipv.it/wp-content/uploads/2023/11/Verbale_IEIE_10_10_2023.pdf"
 ---
 
-Michele Bedodi is listed among the IEIE PhD students in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
+Michele Bedodi is a PhD student in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
 
-The doctoral minutes for the XXXIX cycle associate his fellowship topic with industrial human-robot collaboration through virtual simulation. His profile therefore fits RAMSLAB work on collaborative robotics, digital environments, and simulation-driven industrial processes.
+His research focuses on artificial vision in pharmaceutical applications. In particular, he studies the interaction between laminar airflows and robots in highly controlled environments. His profile perfectly integrates with RAMSLAB's work on advanced industrial robotics and simulation-driven processes.

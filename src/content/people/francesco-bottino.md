@@ -1,18 +1,16 @@
 ---
 name: "Francesco Bottino"
 role: "PhD Candidate"
-shortBio: "PhD candidate."
-areas: ["virtual simulation"]
+shortBio: "PhD candidate specializing in Virtual Reality, immersiveness, and VR/AR applications for sports and industry."
+areas: ["virtual reality", "augmented reality", "simulator sickness"]
 order: 9
 links:
   - label: "LinkedIn"
     url: "#"
   - label: "PhD Students"
     url: "https://phdieie.unipv.it/phd-students/"
-  - label: "IEIE Minutes 2023"
-    url: "https://phdieie.unipv.it/wp-content/uploads/2023/11/Verbale_IEIE_10_10_2023.pdf"
 ---
 
-Francesco Bottino is listed among the IEIE PhD students in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
+Francesco Bottino is a PhD student in Industrial Engineering with Hermes Giberti and Marco Carnevale as tutors.
 
-The doctoral minutes for the XXXIX cycle associate his fellowship topic with industrial human-robot collaboration through virtual simulation. His profile therefore fits RAMSLAB work on collaborative robotics, digital environments, and simulation-driven industrial processes.
+His research focuses on Virtual Reality (VR), with a specific emphasis on studying immersiveness and "simulator sickness" during the use of simulators. Furthermore, he develops advanced VR and Augmented Reality (AR) applications tailored for both the sports and industrial sectors. His expertise strongly enhances RAMSLAB's capabilities in creating cutting-edge digital environments and immersive simulation-driven processes.

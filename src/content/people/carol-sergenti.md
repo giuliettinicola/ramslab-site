@@ -2,8 +2,8 @@
 name: "Carol Sergenti"
 role: "Assistant Professor"
 email: "carol.sergenti@unipv.it"
-shortBio: "Assistant Professor active in applied mechanics, robotics, and biorobotics-related teaching and research."
-areas: ["applied mechanics", "robotics", "biorobotics"]
+shortBio: "Assistant Professor specializing in Human-in-the-loop simulations and human-machine interaction, with a focus on sports and rehabilitation."
+areas: ["human-in-the-loop", "human-machine interaction", "sports simulation", "rehabilitation"]
 order: 5
 links:
   - label: "LinkedIn"
@@ -14,6 +14,6 @@ links:
     url: "https://phdieie.unipv.it/phd-students/"
 ---
 
-Carol Sergenti is listed by the University of Pavia in the Department of Industrial and Information Engineering in the applied mechanics disciplinary area. The current RAMSLAB roster provided for this site identifies her as Assistant Professor.
+Carol Sergenti is an Assistant Professor at the University of Pavia in the Department of Industrial and Information Engineering, in the disciplinary area of applied mechanics.
 
-Her university profile includes teaching activity in Elements of Biorobotics. That makes her profile especially relevant to laboratory work connecting robotics, mechanics, and human-centered applications.
+Her research focuses on Human-in-the-loop simulations, particularly on the design of systems that consider human-machine interaction. She applies these technologies across various domains, with a special emphasis on the sports and rehabilitation sectors. Her university profile also includes teaching activities in Elements of Biorobotics, highlighting her expertise in connecting robotics, mechanics, and human-centered applications within RAMSLAB.
