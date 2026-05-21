@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import PageHeader from '../../components/PageHeader.astro';
 import { getCollection, render } from 'astro:content';
 import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
@@ -18,34 +17,47 @@ const { Content } = await render(person);
 
 <BaseLayout title={`${person.data.name} — RAMSLAB`}>
   <Header />
-  <main>
-    <PageHeader
-      section="People"
-      title={person.data.name}
-      description={person.data.role}
-      note={person.data.areas.length > 0 ? person.data.areas.join(' · ') : undefined}
-    />
-    <section class="detail-section">
+  <main class="projects-page-main">
+    <!-- Header Section aligning with the Figma structure -->
+    <section class="projects-header-section" style="padding: 40px 0 24px;">
       <div class="container detail-layout">
-        <aside class="detail-aside">
-          {person.data.email && (
-            <div class="detail-block">
-              <div class="detail-block-label">Contact</div>
-              <a href={`mailto:${person.data.email}`}>{person.data.email}</a>
+        <div class="project-meta-left" style="width: 220px; display: flex; flex-direction: column; gap: 4px;">
+          <span class="projects-text-little-text" style="font-weight: 700; text-transform: uppercase; color: var(--text);">
+            {person.data.role}
+          </span>
+        </div>
+        <div class="project-content-middle">
+          <h1 class="projects-title-big" style="line-height: 1.0; margin-bottom: 12px;">{person.data.name}</h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Section with new text styles applied -->
+    <section class="detail-section" style="padding-top: 40px;">
+      <div class="container detail-layout">
+        <aside class="detail-aside" style="display: flex; flex-direction: column; gap: 16px;">
+          {person.data.areas.length > 0 && (
+            <div style="display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line-soft); padding-top: 12px;">
+              <div class="projects-text-little-text" style="font-weight: 700; text-transform: uppercase; color: var(--text);">Areas</div>
+              {person.data.areas.map((area) => (
+                <span class="projects-text-little-text" style="color: var(--muted);">{area}</span>
+              ))}
             </div>
           )}
 
-          {person.data.areas.length > 0 && (
-            <div class="detail-block">
-              <div class="detail-block-label">Areas</div>
-              {person.data.areas.map((area) => <div>{area}</div>)}
+          {person.data.email && (
+            <div style="display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line-soft); padding-top: 12px;">
+              <div class="projects-text-little-text" style="font-weight: 700; text-transform: uppercase; color: var(--text);">Contact</div>
+              <a href={`mailto:${person.data.email}`} class="projects-text-little-text hover-underline" style="color: var(--muted); word-break: break-all;">{person.data.email}</a>
             </div>
           )}
 
           {person.data.links.length > 0 && (
-            <div class="detail-block">
-              <div class="detail-block-label">Links</div>
-              {person.data.links.map((link) => <a href={link.url}>{link.label}</a>)}
+            <div style="display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line-soft); padding-top: 12px;">
+              <div class="projects-text-little-text" style="font-weight: 700; text-transform: uppercase; color: var(--text);">Links</div>
+              {person.data.links.map((link) => (
+                <a href={link.url} class="projects-text-little-text hover-underline" style="color: var(--muted);">{link.label}</a>
+              ))}
             </div>
           )}
         </aside>
