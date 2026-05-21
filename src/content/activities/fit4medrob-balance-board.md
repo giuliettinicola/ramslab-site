@@ -5,6 +5,6 @@ year: 2024
 status: "ongoing"
 tags: ["medical robotics", "rehabilitation", "fit4medrob"]
 featured: true
-cover: "/images/projects/3dof.jpg"
+cover: "/images/projects/drivesim.jpg"
 coverFit: "contain"
 ---

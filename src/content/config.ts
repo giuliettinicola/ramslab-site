@@ -7,7 +7,7 @@ const people = defineCollection({ type: 'content', schema: z.object({
   links: z.array(z.object({ label: z.string(), url: z.string() })).default([])
 }) });
 
-const projects = defineCollection({ type: 'content', schema: z.object({
+const activities = defineCollection({ type: 'content', schema: z.object({
   title: z.string(), excerpt: z.string(), cover: z.string().optional(),
   year: z.number().optional(), status: z.enum(['ongoing','completed','featured']).optional(),
   tags: z.array(z.string()).default([]), people: z.array(z.string()).default([]),
@@ -30,4 +30,4 @@ const settings = defineCollection({ type: 'data', schema: z.object({
   address: z.string().optional()
 }) });
 
-export const collections = { people, projects, publications, settings };
+export const collections = { people, activities, publications, settings };

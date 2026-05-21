@@ -6,21 +6,21 @@ import { getCollection } from 'astro:content';
 import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
 
-const projects = (await getCollection('projects')).sort((a, b) => {
+const activities = (await getCollection('activities')).sort((a, b) => {
   if (a.data.featured !== b.data.featured) return Number(b.data.featured) - Number(a.data.featured);
   return (b.data.year ?? 0) - (a.data.year ?? 0);
 });
 ---
 
-<BaseLayout title="Projects — RAMSLAB">
+<BaseLayout title="Activities — RAMSLAB">
   <Header />
   <main class="projects-page-main">
     <section class="projects-header-section">
       <div class="projects-header-container">
         <div class="projects-header-content">
-          <h1 class="projects-title-big">Projects</h1>
+          <h1 class="projects-title-big">Activities</h1>
           <span class="projects-text-little-text" style="width: 150px;">
-            {projects.length} project entries · ordered by featured status and year
+            {activities.length} activity entries · ordered by featured status and year
           </span>
         </div>
       </div>
@@ -28,32 +28,32 @@ const projects = (await getCollection('projects')).sort((a, b) => {
 
     <section class="projects-list-section">
       <div class="projects-list-container">
-        {projects.map((project, index) => (
+        {activities.map((activity, index) => (
           <article class={`project-item-row ${index === 0 ? 'first-row' : ''}`}>
             <div class="project-meta-left">
-              <span class="projects-text-little-text">{project.data.year ? String(project.data.year) : 'Undated'}</span>
-              <span class="projects-text-little-text">{project.data.status ?? 'Project record'}</span>
+              <span class="projects-text-little-text">{activity.data.year ? String(activity.data.year) : 'Undated'}</span>
+              <span class="projects-text-little-text">{activity.data.status ?? 'Activity record'}</span>
             </div>
             <div class="project-content-middle">
               <h2 class="projects-text-link-bold-plus project-title-link">
                 {(() => {
-                  const href = entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
-                    entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
+                  const href = entrySlug(activity.id) === 'demetra-nodes' ? withBase('/activities/demetra/') : 
+                    entrySlug(activity.id) === 'carbon-fiber' ? withBase('/activities/composite-manufacturing/') : 
                     undefined;
-                  return href ? <a href={href}>{project.data.title}</a> : project.data.title;
+                  return href ? <a href={href}>{activity.data.title}</a> : activity.data.title;
                 })()}
               </h2>
-              {project.data.excerpt && <p class="projects-text-link-header">{project.data.excerpt}</p>}
+              {activity.data.excerpt && <p class="projects-text-link-header">{activity.data.excerpt}</p>}
             </div>
             <div class="project-meta-right">
-              {project.data.tags && project.data.tags.length > 0 && (
+              {activity.data.tags && activity.data.tags.length > 0 && (
                 <span class="projects-text-little-text">
-                  {project.data.tags.slice(0, 2).join(' · ')}
+                  {activity.data.tags.slice(0, 2).join(' · ')}
                 </span>
               )}
-              {project.data.people && project.data.people.length > 0 && (
+              {activity.data.people && activity.data.people.length > 0 && (
                 <span class="projects-text-little-text">
-                  {project.data.people.length} related people
+                  {activity.data.people.length} related people
                 </span>
               )}
             </div>

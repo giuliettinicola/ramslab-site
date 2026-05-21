@@ -8,11 +8,11 @@ import { withBase } from '../lib/assets';
 import { entrySlug } from '../lib/entries';
 import site from '../content/settings/site.json';
 
-const projects = (await getCollection('projects')).sort((a, b) => {
+const activities = (await getCollection('activities')).sort((a, b) => {
   if (a.data.featured !== b.data.featured) return Number(b.data.featured) - Number(a.data.featured);
   return (b.data.year ?? 0) - (a.data.year ?? 0);
 });
-const featuredProjects = projects.slice(0, 12);
+const featuredProjects = activities.slice(0, 12);
 const allPeople = (await getCollection('people')).sort((a, b) => a.data.order - b.data.order);
 const people = allPeople.slice(0, 5);
 const otherPeople = allPeople.slice(5).sort((a, b) => {
@@ -48,18 +48,18 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
       </div>
     </section>
 
-    <!-- ─── Projects Section ─── -->
+    <!-- ─── Activities Section ─── -->
     <section class="home-projects">
       <div class="section-heading">
-        <div class="text-heading-2" style="width: 72px;">Projects</div>
+        <div class="text-heading-2" style="width: 72px;">Activities</div>
       </div>
       <div class="media-strip">
         {featuredProjects.map((project) => (
           <ProjectCard
             href={
-              entrySlug(project.id) === 'dynamica-prin' ? withBase('/projects/dynamica/') : 
-              entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
-              entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
+              entrySlug(project.id) === 'dynamica-prin' ? withBase('/activities/dynamica/') : 
+              entrySlug(project.id) === 'demetra-nodes' ? withBase('/activities/demetra/') : 
+              entrySlug(project.id) === 'carbon-fiber' ? withBase('/activities/composite-manufacturing/') : 
               undefined
             }
             title={project.data.title}
@@ -82,13 +82,15 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
         <div class="dense-list">
           {publications.map((publication) => (
             <article class="dense-item">
-              <div class="text-list-title" style="color: var(--text);">{publication.data.title}</div>
+              <div class="text-list-title" style="color: var(--text);">
+                <a href={(publication.data.doi ? `https://doi.org/${publication.data.doi}` : publication.data.url) || '#'} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;" class="hover-underline">{publication.data.title}</a>
+              </div>
               <div class="text-list-meta" style="color: var(--muted);">{publication.data.authors.join(', ')}</div>
               {publication.data.venue && <div class="text-emphasis" style="color: var(--muted);">{publication.data.venue}</div>}
             </article>
           ))}
           <div class="home-column-footer">
-            <a href={withBase('/publications/')} class="text-heading-2" style="text-decoration: none;">browse all publications</a>
+            <a href={withBase('/publications/')} class="text-heading-2 hover-underline" style="color: inherit; text-decoration: none;">browse all publications</a>
             <span style="font-size: 14px;">➞</span>
           </div>
         </div>
@@ -129,8 +131,8 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
             <div class="text-list-meta" style="color: var(--muted);">Overview, scope, contact information, and the current structure of the RAMSLAB site.</div>
           </article>
           <article class="dense-item">
-            <div class="text-list-title"><a href={withBase('/projects/')}>Project archive</a></div>
-            <div class="text-list-meta" style="color: var(--muted);">Research projects, prototypes, and collaborative investigations.</div>
+            <div class="text-list-title"><a href={withBase('/activities/')}>Activities archive</a></div>
+            <div class="text-list-meta" style="color: var(--muted);">Research activities, prototypes, and collaborative investigations.</div>
           </article>
           <article class="dense-item">
             <div class="text-list-title"><a href={withBase('/publications/')}>Publication archive</a></div>

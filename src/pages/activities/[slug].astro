@@ -10,33 +10,33 @@ import { entrySlug } from '../../lib/entries';
 import CarbonFiberProject from '../../components/CarbonFiberProject.astro';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project) => ({ params: { slug: entrySlug(project.id) }, props: { project } }));
+  const activities = await getCollection('activities');
+  return activities.map((activity) => ({ params: { slug: entrySlug(activity.id) }, props: { activity } }));
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const { activity } = Astro.props;
+const { Content } = await render(activity);
 const people = await getCollection('people');
 const publications = await getCollection('publications');
-const relatedPeople = people.filter((person) => project.data.people.includes(entrySlug(person.id)));
-const relatedPublications = publications.filter((publication) => project.data.publications.includes(entrySlug(publication.id)));
-const note = [project.data.year ? String(project.data.year) : '', project.data.status].filter(Boolean).join(' · ');
+const relatedPeople = people.filter((person) => activity.data.people.includes(entrySlug(person.id)));
+const relatedPublications = publications.filter((publication) => activity.data.publications.includes(entrySlug(publication.id)));
+const note = [activity.data.year ? String(activity.data.year) : '', activity.data.status].filter(Boolean).join(' · ');
 ---
-{project.id === 'carbon-fiber' ? (
+{activity.id === 'carbon-fiber' ? (
   <CarbonFiberProject 
-    project={project} 
+    project={activity} 
     Content={Content}
     relatedPeople={relatedPeople} 
     relatedPublications={relatedPublications} 
   />
 ) : (
-<BaseLayout title={`${project.data.title} — RAMSLAB`}>
+<BaseLayout title={`${activity.data.title} — RAMSLAB`}>
   <Header />
   <main>
     <PageHeader
-      section="Projects"
-      title={project.data.title}
-      description={project.data.excerpt}
+      section="Activities"
+      title={activity.data.title}
+      description={activity.data.excerpt}
       note={note}
     />
     <section class="detail-section">
@@ -44,14 +44,14 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
         <aside class="detail-aside">
           <div class="detail-block">
             <div class="detail-block-label">Record</div>
-            {project.data.year && <div>{project.data.year}</div>}
-            {project.data.status && <div>{project.data.status}</div>}
+            {activity.data.year && <div>{activity.data.year}</div>}
+            {activity.data.status && <div>{activity.data.status}</div>}
           </div>
 
-          {project.data.tags.length > 0 && (
+          {activity.data.tags.length > 0 && (
             <div class="detail-block">
               <div class="detail-block-label">Tags</div>
-              {project.data.tags.map((tag) => <div>{tag}</div>)}
+              {activity.data.tags.map((tag) => <div>{tag}</div>)}
             </div>
           )}
 
@@ -75,9 +75,9 @@ const note = [project.data.year ? String(project.data.year) : '', project.data.s
         </aside>
 
         <article class="detail-main">
-          {project.data.cover && (
+          {activity.data.cover && (
             <figure class="detail-media">
-              <img src={withBase(project.data.cover)} alt={project.data.title} />
+              <img src={withBase(activity.data.cover)} alt={activity.data.title} />
             </figure>
           )}
           <div class="detail-content">

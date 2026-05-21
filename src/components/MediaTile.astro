@@ -8,7 +8,7 @@ interface Props {
   fit?: 'cover' | 'contain';
 }
 
-const { href, title, meta, src, alt = title, fit = 'cover' } = Astro.props;
+const { href, title, meta, src, alt = title, fit = 'contain' } = Astro.props;
 import { withBase } from '../lib/assets';
 ---
 

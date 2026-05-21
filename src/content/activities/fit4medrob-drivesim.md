@@ -5,6 +5,6 @@ year: 2024
 status: "ongoing"
 tags: ["simulators", "driving", "rehabilitation", "fit4medrob"]
 featured: true
-cover: "/images/projects/drivesim.jpg"
+cover: "/images/projects/3dof.jpg"
 coverFit: "contain"
 ---
