@@ -978,3 +978,157 @@ ol {
     flex-wrap: wrap;
   }
 }
+
+/* ─── Projects Page (Pixel-Perfect Figma SSoT) ─── */
+
+.projects-title-big {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 4.725rem; /* 75.6px */
+  line-height: 1.2;
+  letter-spacing: -0.0265em;
+  color: var(--text);
+  margin: 0;
+}
+
+.projects-text-link-bold-plus {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem; /* 16px */
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0;
+}
+
+.projects-text-link-header {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0;
+}
+
+.projects-text-little-text {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.projects-page-main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1512px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.projects-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 40px var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+
+.projects-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding-left: 166px;
+  width: 100%;
+}
+
+.projects-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.projects-list-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 40px var(--pad);
+}
+
+.projects-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.project-item-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line-soft);
+  width: 100%;
+}
+
+.project-item-row.first-row {
+  padding: 0 0 20px;
+  border-top: none;
+}
+
+.project-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.project-content-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-title-link a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-title-link a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.project-meta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 147px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1180px) {
+  .projects-header-container {
+    padding-left: 0;
+  }
+  .project-item-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .project-meta-left, .project-meta-right {
+    width: 100%;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}

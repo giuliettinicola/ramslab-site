@@ -2,8 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import ArchiveItem from '../../components/ArchiveItem.astro';
 import { getCollection } from 'astro:content';
 import { withBase } from '../../lib/assets';
 import { entrySlug } from '../../lib/entries';
@@ -16,34 +14,51 @@ const projects = (await getCollection('projects')).sort((a, b) => {
 
 <BaseLayout title="Projects — RAMSLAB">
   <Header />
-  <main>
-    <PageHeader
-      section="Projects"
-      title="Projects"
-      description="Research projects, prototypes, and collaborative investigations presented as a structured archive."
-    />
-    <section class="archive-section">
-      <div class="container">
-        <div class="archive-group">
-          <div class="archive-list">
-            {projects.map((project) => (
-              <ArchiveItem
-                title={project.data.title}
-                href={
-                  entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
-                  entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
-                  undefined
-                }
-                text={project.data.excerpt}
-                left={[project.data.year ? String(project.data.year) : 'Undated', project.data.status ?? 'Project record']}
-                right={[
-                  project.data.tags.length > 0 ? project.data.tags.slice(0, 2).join(' · ') : '',
-                  project.data.people.length > 0 ? `${project.data.people.length} related people` : ''
-                ].filter(Boolean)}
-              />
-            ))}
-          </div>
+  <main class="projects-page-main">
+    <section class="projects-header-section">
+      <div class="projects-header-container">
+        <div class="projects-header-content">
+          <h1 class="projects-title-big">Projects</h1>
+          <span class="projects-text-little-text" style="width: 150px;">
+            {projects.length} project entries · ordered by featured status and year
+          </span>
         </div>
+      </div>
+    </section>
+
+    <section class="projects-list-section">
+      <div class="projects-list-container">
+        {projects.map((project, index) => (
+          <article class={`project-item-row ${index === 0 ? 'first-row' : ''}`}>
+            <div class="project-meta-left">
+              <span class="projects-text-little-text">{project.data.year ? String(project.data.year) : 'Undated'}</span>
+              <span class="projects-text-little-text">{project.data.status ?? 'Project record'}</span>
+            </div>
+            <div class="project-content-middle">
+              <h2 class="projects-text-link-bold-plus project-title-link">
+                {(() => {
+                  const href = entrySlug(project.id) === 'demetra-nodes' ? withBase('/projects/demetra/') : 
+                    entrySlug(project.id) === 'carbon-fiber' ? withBase('/projects/composite-manufacturing/') : 
+                    undefined;
+                  return href ? <a href={href}>{project.data.title}</a> : project.data.title;
+                })()}
+              </h2>
+              {project.data.excerpt && <p class="projects-text-link-header">{project.data.excerpt}</p>}
+            </div>
+            <div class="project-meta-right">
+              {project.data.tags && project.data.tags.length > 0 && (
+                <span class="projects-text-little-text">
+                  {project.data.tags.slice(0, 2).join(' · ')}
+                </span>
+              )}
+              {project.data.people && project.data.people.length > 0 && (
+                <span class="projects-text-little-text">
+                  {project.data.people.length} related people
+                </span>
+              )}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   </main>
