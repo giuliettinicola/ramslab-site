@@ -39,22 +39,24 @@ const getActivityHref = (activityId: string) => {
               <span class="projects-text-little-text">{activity.data.year ? String(activity.data.year) : 'Undated'}</span>
               <span class="projects-text-little-text">{activity.data.status ?? 'Activity record'}</span>
             </div>
-            <div class="project-content-middle">
-              <h2 class="projects-text-link-bold-plus project-title-link">
-                <a href={getActivityHref(activity.id)}>{activity.data.title}</a>
-              </h2>
-              {activity.data.excerpt && <p class="projects-text-link-header">{activity.data.excerpt}</p>}
+            <div class="project-body-right-wrap">
+              <div class="project-content-middle">
+                <h2 class="projects-text-link-bold-plus project-title-link">
+                  <a href={getActivityHref(activity.id)}>{activity.data.title}</a>
+                </h2>
+                {activity.data.excerpt && <p class="projects-text-link-header">{activity.data.excerpt}</p>}
+              </div>
+              {activity.data.cover && (
+                <a href={getActivityHref(activity.id)} class="project-image-right">
+                  <img 
+                    src={withBase(activity.data.cover)} 
+                    alt={activity.data.title} 
+                    class={activity.data.coverFit === 'contain' ? 'fit-contain' : 'fit-cover'}
+                    loading="lazy"
+                  />
+                </a>
+              )}
             </div>
-            {activity.data.cover && (
-              <a href={getActivityHref(activity.id)} class="project-image-right">
-                <img 
-                  src={withBase(activity.data.cover)} 
-                  alt={activity.data.title} 
-                  class={activity.data.coverFit === 'contain' ? 'fit-contain' : 'fit-cover'}
-                  loading="lazy"
-                />
-              </a>
-            )}
           </article>
         ))}
       </div>
