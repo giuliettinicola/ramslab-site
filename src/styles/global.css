@@ -1300,7 +1300,7 @@ ol {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid #ffffff;
-  background-color: var(--surface);
+  background-color: #ffffff;
 }
 
 .activity-card-image-link img {
