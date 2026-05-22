@@ -1014,8 +1014,11 @@ ol {
   }
 
   .site-nav {
-    gap: 8px 14px;
+    gap: 8px 20px;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
   }
 
   /* Footer mobile optimizations - Fluid Grid Best Practice */
