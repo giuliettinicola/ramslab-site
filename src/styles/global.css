@@ -976,6 +976,23 @@ ol {
     flex-direction: column;
   }
 
+  .home-intro-grid > * {
+    flex: none;
+  }
+
+  .home-intro-label {
+    gap: 8px;
+  }
+
+  .text-body {
+    font-size: 0.95rem; /* 15.2px */
+  }
+
+  .text-link-header,
+  .text-list-title {
+    font-size: 0.825rem; /* 13.2px */
+  }
+
   .home-columns {
     flex-direction: column;
   }
