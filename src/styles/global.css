@@ -493,9 +493,10 @@ ol {
 .pub-title {
   display: flex;
   gap: 12px;
-  font-size: 0.95rem;
+  font-family: var(--font-sans);
   font-weight: 700;
-  line-height: 1.4;
+  font-size: 0.875rem; /* 14px, same as .text-list-title */
+  line-height: 1.2;
   color: var(--text);
 }
 
@@ -506,25 +507,29 @@ ol {
 }
 
 .pub-authors {
-  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.75rem; /* 12px, same as .text-list-meta */
   line-height: 1.5;
-  color: var(--text-soft);
+  color: var(--muted);
 }
 
 .pub-venue {
-  font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-family: var(--font-sans);
   font-style: italic;
+  font-weight: 400;
+  font-size: 0.75rem; /* 12px, same as .text-emphasis */
   line-height: 1.5;
   color: var(--muted);
 }
 
 .pub-link {
-  font-size: 0.82rem;
+  font-family: var(--font-sans);
   font-weight: 700;
+  font-size: 0.75rem; /* 12px */
   color: var(--text);
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.25em;
 }
 
 .pub-link:hover {
@@ -989,7 +994,8 @@ ol {
   }
 
   .text-link-header,
-  .text-list-title {
+  .text-list-title,
+  .pub-title {
     font-size: 0.825rem; /* 13.2px */
   }
 
@@ -1021,43 +1027,48 @@ ol {
     padding: 0;
   }
 
-  /* Footer mobile optimizations - Fluid Grid Best Practice */
+  /* Footer mobile optimizations - Single Line Layout */
   .site-footer-inner {
-    display: grid;
-    grid-template-areas: 
-      "unipv ramslab"
-      "dept dept";
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+    width: 100%;
   }
 
   .footer-unipv {
-    grid-area: unipv;
+    flex: 0 0 auto;
     width: auto;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-start;
   }
 
   .footer-meta {
-    grid-area: ramslab;
+    flex: 0 0 auto;
     width: auto;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .footer-unipv img,
   .footer-meta img {
-    height: auto;
-    max-height: 36px;
+    height: 18px;
+    width: auto;
+    max-height: 18px;
     max-width: 100%;
-    width: auto; /* I loghi si ridimensionano fluidamente su schermi microscopici */
+    display: block;
   }
 
   .footer-department {
-    grid-area: dept;
-    font-size: 0.72rem;
-    line-height: 1.4;
+    flex: 1;
+    font-size: 0.55rem; /* ~8.8px */
+    line-height: 1.3;
     text-align: center;
+    color: #d7d7d7;
+    white-space: normal;
+    min-width: 0;
   }
 }
 
@@ -1123,7 +1134,7 @@ ol {
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  padding-left: 166px;
+  padding-left: 0;
   width: 100%;
 }
 
