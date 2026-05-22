@@ -29,6 +29,7 @@ const project = {
           <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMS Lab" class="logo-ramslab" />
         </a>
       </div>
+      <a href={withBase('/activities/')} class="back-btn">← Back to Activities</a>
     </div>
 
     <!-- SECTION 1: HERO -->
@@ -142,7 +143,7 @@ const project = {
             </div>
           </div>
           <footer class="info-footer">
-            <a href={withBase('/projects/')} class="back-link">← Return to Projects</a>
+            <a href={withBase('/activities/')} class="back-link">← Return to Activities</a>
           </footer>
         </div>
       </div>
@@ -172,21 +173,70 @@ const project = {
   /* FIXED UI */
   .fixed-ui {
     position: fixed;
-    top: 2rem;
-    left: 2rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 2rem;
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .brand-logos {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    opacity: 0.8;
+    gap: 1.5rem;
+    opacity: 0.9;
   }
 
-  .logo-unipv { height: 60px; filter: brightness(0) invert(1); }
-  .logo-ramslab { height: 45px; filter: brightness(0) invert(1); }
-  .logo-separator { width: 1px; height: 45px; background-color: rgba(255, 255, 255, 0.4); }
+  .logo-unipv { height: 36px; filter: brightness(0) invert(1); }
+  .logo-ramslab { height: 28px; filter: brightness(0) invert(1); }
+  .logo-separator { width: 1px; height: 24px; background-color: rgba(255, 255, 255, 0.3); }
+
+  .back-btn {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    background: transparent;
+  }
+
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    .fixed-ui {
+      padding: 0.75rem 1rem;
+    }
+    .brand-logos {
+      gap: 1rem;
+    }
+    .logo-unipv {
+      height: 28px;
+    }
+    .logo-ramslab {
+      height: 22px;
+    }
+    .logo-separator {
+      height: 18px;
+    }
+    .back-btn {
+      padding: 0.35rem 0.7rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.10em;
+    }
+  }
 
   /* SECTION BASE */
   .section {

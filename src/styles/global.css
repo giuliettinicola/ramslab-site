@@ -952,13 +952,23 @@ ol {
   }
 
   .site-header-inner {
+    position: relative;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+    padding-top: 24px;
+    padding-bottom: 16px;
   }
 
-  .site-brand,
+  .site-brand {
+    width: auto;
+    max-width: calc(100% - 90px); /* Evita collisioni col logo UNIPV a destra su schermi piccolissimi */
+  }
+
   .site-indicator {
+    position: absolute;
+    top: 24px;
+    right: 0;
     width: auto;
   }
 
@@ -989,6 +999,45 @@ ol {
   .site-nav {
     gap: 8px 14px;
     flex-wrap: wrap;
+  }
+
+  /* Footer mobile optimizations - Fluid Grid Best Practice */
+  .site-footer-inner {
+    display: grid;
+    grid-template-areas: 
+      "unipv ramslab"
+      "dept dept";
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 16px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .footer-unipv {
+    grid-area: unipv;
+    width: auto;
+    justify-content: center;
+  }
+
+  .footer-meta {
+    grid-area: ramslab;
+    width: auto;
+    justify-content: center;
+  }
+
+  .footer-unipv img,
+  .footer-meta img {
+    height: auto;
+    max-height: 36px;
+    max-width: 100%;
+    width: auto; /* I loghi si ridimensionano fluidamente su schermi microscopici */
+  }
+
+  .footer-department {
+    grid-area: dept;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    text-align: center;
   }
 }
 
@@ -1150,3 +1199,11 @@ ol {
   text-decoration: underline !important;
   text-underline-offset: 0.2em;
 }
+
+@media (max-width: 760px) {
+  .projects-title-big {
+    font-size: 2.7rem !important;
+    letter-spacing: -0.02em !important;
+  }
+}
+

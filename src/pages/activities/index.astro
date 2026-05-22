@@ -19,9 +19,6 @@ const activities = (await getCollection('activities')).sort((a, b) => {
       <div class="projects-header-container">
         <div class="projects-header-content">
           <h1 class="projects-title-big">Activities</h1>
-          <span class="projects-text-little-text" style="width: 150px;">
-            {activities.length} activity entries · ordered by featured status and year
-          </span>
         </div>
       </div>
     </section>
@@ -44,18 +41,6 @@ const activities = (await getCollection('activities')).sort((a, b) => {
                 })()}
               </h2>
               {activity.data.excerpt && <p class="projects-text-link-header">{activity.data.excerpt}</p>}
-            </div>
-            <div class="project-meta-right">
-              {activity.data.tags && activity.data.tags.length > 0 && (
-                <span class="projects-text-little-text">
-                  {activity.data.tags.slice(0, 2).join(' · ')}
-                </span>
-              )}
-              {activity.data.people && activity.data.people.length > 0 && (
-                <span class="projects-text-little-text">
-                  {activity.data.people.length} related people
-                </span>
-              )}
             </div>
           </article>
         ))}

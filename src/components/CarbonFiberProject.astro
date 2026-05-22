@@ -41,16 +41,29 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
 
     .fixed-header {
       position: fixed;
-      top: 2rem;
-      left: 2rem;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.25rem 2rem;
       z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-logos {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       opacity: 0.9;
     }
-    .fixed-header img {
-      height: 32px;
+    .logo-unipv {
+      height: 36px !important;
+      width: auto;
+    }
+    .logo-ramslab {
+      height: 28px !important;
       width: auto;
     }
     .fixed-header .separator {
@@ -59,10 +72,6 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
       background: rgba(255,255,255,0.3);
     }
     .back-btn {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      z-index: 100;
       color: #fff;
       text-decoration: none;
       font-size: 0.75rem;
@@ -71,9 +80,35 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
       border: 1px solid rgba(255,255,255,0.3);
       padding: 0.5rem 1rem;
       transition: all 0.3s ease;
+      font-weight: 600;
+      background: transparent;
     }
     .back-btn:hover {
       background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+    @media (max-width: 768px) {
+      .fixed-header {
+        padding: 0.75rem 1rem;
+      }
+      .brand-logos {
+        gap: 1rem;
+      }
+      .logo-unipv {
+        height: 28px !important;
+      }
+      .logo-ramslab {
+        height: 22px !important;
+      }
+      .fixed-header .separator {
+        height: 18px;
+      }
+      .back-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.10em;
+      }
     }
 
     section {
@@ -238,16 +273,17 @@ const { project, relatedPeople, relatedPublications } = Astro.props;
 </head>
 <body class="carbon-bg">
   <header class="fixed-header">
-    <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
-      <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" />
-    </a>
-    <div class="separator"></div>
-    <a href={withBase('/')}>
-      <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMSLAB" />
-    </a>
+    <div class="brand-logos">
+      <a href="https://portale.unipv.it/it" target="_blank" rel="noopener noreferrer">
+        <img src={withBase('/images/brand/unipv-main-logo-white.png')} alt="UNIPV" class="logo-unipv" />
+      </a>
+      <div class="separator"></div>
+      <a href={withBase('/')}>
+        <img src={withBase('/images/brand/ramslab-logo-white.svg')} alt="RAMSLAB" class="logo-ramslab" />
+      </a>
+    </div>
+    <a href={withBase('/activities/')} class="back-btn">← Back to Activities</a>
   </header>
-
-  <a href={withBase('/activities/')} class="back-btn">Back</a>
 
   <section class="hero">
     <div class="hero-video-bg">

@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import PageHeader from '../../components/PageHeader.astro';
 import PublicationItem from '../../components/PublicationItem.astro';
 import { getCollection } from 'astro:content';
 
@@ -19,12 +18,14 @@ const groupedPublications = Object.entries(
 
 <BaseLayout title="Publications — RAMSLAB">
   <Header />
-  <main>
-    <PageHeader
-      section="Publications"
-      title="Publications"
-      description="Selected papers and conference contributions grouped by year."
-    />
+  <main class="projects-page-main">
+    <section class="projects-header-section">
+      <div class="projects-header-container">
+        <div class="projects-header-content">
+          <h1 class="projects-title-big">Publications</h1>
+        </div>
+      </div>
+    </section>
     <section class="archive-section">
       <div class="container">
         {groupedPublications.map(([year, items]) => (

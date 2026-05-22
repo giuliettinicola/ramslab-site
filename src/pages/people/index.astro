@@ -33,18 +33,6 @@ const people = (await getCollection('people')).sort((a, b) => a.data.order - b.d
               </h2>
               {person.data.shortBio && <p class="projects-text-link-header">{person.data.shortBio}</p>}
             </div>
-            <div class="project-meta-right">
-              {person.data.areas && person.data.areas.length > 0 && (
-                <span class="projects-text-little-text">
-                  {person.data.areas.slice(0, 2).join(' · ')}
-                </span>
-              )}
-              {person.data.email && (
-                <span class="projects-text-little-text" style="word-break: break-all;">
-                  {person.data.email}
-                </span>
-              )}
-            </div>
           </article>
         ))}
       </div>
