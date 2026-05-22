@@ -75,13 +75,13 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
     <section class="home-columns">
 
       <!-- Publications Column -->
-      <div class="home-column">
-        <div class="home-column-heading">
+      <div class="home-column col-1">
+        <div class="home-column-heading col-heading">
           <h2 class="text-heading-2">Publications</h2>
         </div>
         <div class="dense-list">
-          {publications.map((publication) => (
-            <article class="dense-item">
+          {publications.map((publication, index) => (
+            <article class="dense-item" style={`--row: ${index + 2}`}>
               <div class="text-list-title" style="color: var(--text);">
                 <a href={(publication.data.doi ? `https://doi.org/${publication.data.doi}` : publication.data.url) || '#'} target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;" class="hover-underline">{publication.data.title}</a>
               </div>
@@ -89,7 +89,7 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
               {publication.data.venue && <div class="text-emphasis" style="color: var(--muted);">{publication.data.venue}</div>}
             </article>
           ))}
-          <div class="home-column-footer">
+          <div class="home-column-footer" style="--row: 6">
             <a href={withBase('/publications/')} class="text-heading-2 hover-underline" style="color: inherit; text-decoration: none;">browse all publications</a>
             <span style="font-size: 14px;">➞</span>
           </div>
@@ -97,24 +97,22 @@ const publications = (await getCollection('publications')).sort((a, b) => b.data
       </div>
 
       <!-- People Column -->
-      <div class="home-column">
-        <div class="home-column-heading">
+      <div class="home-column col-2">
+        <div class="home-column-heading col-heading">
           <h2 class="text-heading-2">People</h2>
         </div>
         <div class="dense-list">
-          {people.map((person) => (
-            <article class="dense-item">
+          {people.map((person, index) => (
+            <article class="dense-item" style={`--row: ${index + 2}`}>
               <div class="text-list-title"><a href={withBase(`/people/${entrySlug(person.id)}/`)}>{person.data.name}</a></div>
               <div class="text-list-meta" style="color: var(--muted);">{person.data.role}</div>
             </article>
           ))}
         </div>
         {otherPeople.length > 0 && (
-          <div class="home-column-phd">
+          <div class="home-column-phd" style="--row: 7">
             {otherPeople.map((person, index) => (
-              <Fragment>
-                <a href={withBase(`/people/${entrySlug(person.id)}/`)} class="text-link-header" style="color: var(--text);">{person.data.name}</a>{index < otherPeople.length - 1 ? <span class="text-link-header" style="color: var(--text);">, </span> : ''}
-              </Fragment>
+              <Fragment><a href={withBase(`/people/${entrySlug(person.id)}/`)} class="text-link-header" style="color: var(--text);">{person.data.name}</a>{index < otherPeople.length - 1 ? ", " : ""}</Fragment>
             ))}
           </div>
         )}
