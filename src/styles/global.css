@@ -288,6 +288,16 @@ ol {
   background: #fff;
 }
 
+.media-thumb img.fit-cover {
+  object-fit: cover;
+  padding: 0;
+}
+
+.media-thumb img.fit-contain {
+  object-fit: contain;
+  padding: 10px;
+}
+
 .media-thumb-placeholder {
   width: 100%;
   height: 100%;
