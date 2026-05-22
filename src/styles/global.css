@@ -1028,6 +1028,15 @@ ol {
   }
 
   /* Footer mobile optimizations - Single Line Layout */
+  .site-footer {
+    padding: 12px var(--pad);
+  }
+
+  .site-footer-legal {
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+
   .site-footer-inner {
     display: flex;
     flex-direction: row;
