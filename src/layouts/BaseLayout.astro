@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import site from '../content/settings/site.json';
+import { withBase } from '../lib/assets';
 
 interface Props {
   title?: string;
@@ -17,6 +18,7 @@ const { title = site.siteTitle, description = site.siteDescription } = Astro.pro
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href={withBase('/images/brand/ramslab-icon-black.png')} />
 
     <!-- Auth guard: runs before paint to avoid flash -->
     <script is:inline>
