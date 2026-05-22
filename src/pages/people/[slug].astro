@@ -21,11 +21,6 @@ const { Content } = await render(person);
     <section class="profile-header-section">
       <div class="profile-header-container container">
         <h1 class="projects-title-big profile-name-box" style="color: var(--text);">{person.data.name}</h1>
-        {person.data.areas && person.data.areas.length > 0 && (
-          <span class="projects-text-little-text profile-areas-box" style="color: var(--muted);">
-            {person.data.areas.join(' · ')}
-          </span>
-        )}
       </div>
     </section>
 
@@ -109,11 +104,11 @@ const { Content } = await render(person);
       flex-direction: row;
       align-items: center;
       gap: 16px;
-      padding: 0 100px 0 266px;
+      padding: 0;
       width: 100%;
       flex-wrap: wrap;
     }
-    .profile-role-box, .profile-areas-box {
+    .profile-role-box {
       width: 150px;
     }
     .profile-name-box {
@@ -174,14 +169,17 @@ const { Content } = await render(person);
 
     @media (max-width: 1200px) {
       .profile-header-container {
-        padding: 0 100px;
+        padding: 0;
       }
       .profile-text-content {
         padding-right: 0;
       }
     }
     @media (max-width: 768px) {
-      .profile-header-container, .profile-bio-container {
+      .profile-header-container {
+        padding: 0;
+      }
+      .profile-bio-container {
         padding: 0 20px;
       }
       .profile-bio-content-row {
