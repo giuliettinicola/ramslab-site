@@ -1299,7 +1299,7 @@ ol {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--line-soft);
   background-color: #ffffff;
 }
 
