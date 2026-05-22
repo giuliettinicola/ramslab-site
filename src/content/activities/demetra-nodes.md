@@ -6,4 +6,5 @@ status: "ongoing"
 tags: ["smart agriculture", "virtual-reality", "haptic"]
 featured: true
 cover: "/images/projects/demetra.png"
+coverFit: "contain"
 ---

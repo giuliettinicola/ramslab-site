@@ -6,4 +6,5 @@ status: "ongoing"
 tags: ["HRI", "artificial intelligence", "nodes"]
 featured: false
 cover: "/images/projects/bici-43.png"
+coverFit: "contain"
 ---

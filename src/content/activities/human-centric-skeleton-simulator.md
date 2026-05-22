@@ -6,5 +6,5 @@ status: "ongoing"
 tags: ["simulation", "biomechanics", "human-robot interaction"]
 featured: false
 cover: "/images/projects/skeleton.png"
-coverFit: "cover"
+coverFit: "contain"
 ---
