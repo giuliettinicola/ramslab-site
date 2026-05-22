@@ -6,5 +6,5 @@ status: "ongoing"
 tags: ["control theory", "robotics", "PRIN"]
 featured: true
 cover: "/images/projects/agentic.png"
-coverFit: "contain"
+coverFit: "cover"
 ---

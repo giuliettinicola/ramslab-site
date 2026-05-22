@@ -6,5 +6,5 @@ status: "ongoing"
 tags: ["medical robotics", "rehabilitation", "fit4medrob"]
 featured: true
 cover: "/images/projects/drivesim.jpg"
-coverFit: "contain"
+coverFit: "cover"
 ---

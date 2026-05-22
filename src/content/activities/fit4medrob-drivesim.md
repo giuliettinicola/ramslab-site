@@ -6,5 +6,5 @@ status: "ongoing"
 tags: ["simulators", "driving", "rehabilitation", "fit4medrob"]
 featured: true
 cover: "/images/projects/3dof.jpg"
-coverFit: "contain"
+coverFit: "cover"
 ---
